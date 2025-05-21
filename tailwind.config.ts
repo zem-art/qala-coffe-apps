@@ -2,19 +2,19 @@ import type { Config } from 'tailwindcss';
 
 const config: Config = {
     content: [
-        './src/pages/**/*.{ts,tsx}',
-        './src/components/**/*.{ts,tsx}',
-        './src/app/**/*.{ts,tsx}',
+        './src/app/**/*.{js,ts,jsx,tsx}',
+        './src/components/**/*.{js,ts,jsx,tsx}'
       ],
     theme: {
         extend: {
             colors: {
                 primary: '#1DA1F2',
-                // primary: '#0F172A',
                 secondary: '#14171A',
                 accent: '#657786',
                 background: '#F5F8FA',
                 text: '#14171A',
+                main: "#9b5727",
+                'text-primary' : '#1DA1F2'
             },
             fontFamily: {
                 sans: 'var(--font-sans)',
