@@ -2,14 +2,7 @@
 @tailwind utilities;
 @config '../../tailwind.config.ts';
 
-/* :root {
+:root {
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-} */
-:root {
-  --main-color: #443;
-  --border-radius: 95% 4% 97% 5% / 4% 94% 3% 95%;
-  --border-radius-hover: 4% 95% 6% 95% / 95% 4% 92% 5%;
-  --border: .2rem solid var(--main-color);
-  --border-hover: .2rem dashed var(--main-color);
 }
