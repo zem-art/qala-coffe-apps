@@ -19,9 +19,9 @@ export const Header = () => {
       {/* Logo */}
       <a
         href="#"
-        className="text-[2.3rem] text-main font-semibold flex items-center"
+        className="text-[2.3rem] text-main font-semibold flex items-center "
       >
-        coffee <IconRenderer lib="fa" name="FaCoffee" className="text-primary ml-2" />
+        qala <IconRenderer lib="fa" name="FaCoffee" className="text-primary ml-4 mt-2" />
       </a>
 
       {/* Navbar */}
