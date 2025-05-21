@@ -1,4 +1,3 @@
-// components/IconRenderer.tsx
 import { getIcon } from "~/utils/icon";
 
 type IconRendererProps = {
