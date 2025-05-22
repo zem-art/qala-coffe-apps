@@ -5,19 +5,19 @@ const config: Config = {
     extend: {
       colors: {
         // main: "#443",
+        main: "#9b5727",
         primary: '#1DA1F2',
         secondary: '#14171A',
         accent: '#657786',
         background: '#F5F8FA',
         text: '#14171A',
-        main: "#9b5727",
         'text-primary' : '#1DA1F2'
-    },
-    borderRadius: {
+      },
+      borderRadius: {
         custom: "95% 4% 97% 5% / 4% 94% 3% 95%",
         "custom-hover": "4% 95% 6% 95% / 95% 4% 92% 5%",
-    },
-    fontFamily: {
+      },
+      fontFamily: {
         poppins: ["'Poppins'", "sans-serif"],
         // sans: 'var(--font-sans)',
       },
@@ -53,6 +53,15 @@ const config: Config = {
             borderRadius: "95% 4% 97% 5% / 4% 94% 3% 95%",
           },
         },
+      },
+      screens: {
+        '2xs': "320px",
+        "xs": "425px",
+        'sm': "640px",
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1536px',
       },
     },
   },
