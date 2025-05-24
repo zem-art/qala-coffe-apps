@@ -6,6 +6,8 @@ import { api, HydrateClient } from "~/trpc/server";
 import { Header } from "./_components/header";
 import { HomeSection } from "./_components/home";
 import { AboutSection } from "./_components/about";
+import { MenuSection } from "./_components/menu_components";
+import { ReviewSection } from "./_components/review_section";
 
 export default async function Home() {
   const hello = await api.post.hello({ text: "from tRPC" });
@@ -20,6 +22,8 @@ export default async function Home() {
       <Header />
       <HomeSection/>
       <AboutSection/>
+      <MenuSection/>
+      <ReviewSection/>
     </HydrateClient>
   );
 }
