@@ -10,7 +10,7 @@ interface ReviewItemProps {
 
 export const ReviewItem = ({ image, name, role, text }: ReviewItemProps) => {
   return (
-    <div className="relative border rounded-xl text-center p-6 shadow-md bg-white">
+    <div className="relative border border-main hover:border-dashed rounded-xl text-center p-6 shadow-md">
       <IconRenderer
         lib="fa"
         name="FaQuoteLeft"

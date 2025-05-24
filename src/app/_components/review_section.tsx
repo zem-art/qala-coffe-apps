@@ -1,5 +1,4 @@
 "use client";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -40,33 +39,33 @@ export const ReviewSection = () => {
         Reviews{" "}
         <span className="block text-main text-2xl font-normal">what people say</span>
       </h1>
-
-      <Swiper
-        modules={[Autoplay, Pagination]}
-        // pagination={{ clickable: true }}
-        loop={true}
-        grabCursor={true}
-        autoplay={{
-          delay: 7500,
-          disableOnInteraction: false,
-        }}
-        spaceBetween={20}
-        breakpoints={{
-          0: {
-            slidesPerView: 1,
-          },
-          768: {
-            slidesPerView: 2,
-          },
-        }}
-        className="max-w-6xl mx-auto"
-      >
-        {reviews.map((review, idx) => (
-          <SwiperSlide key={idx}>
-            <ReviewItem {...review} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <div className="max-w-7xl mx-auto">
+        <Swiper
+          modules={[Autoplay, Pagination]}
+          // pagination={{ clickable: true }}
+          loop={true}
+          grabCursor={true}
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          spaceBetween={20}
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+            },
+            768: {
+              slidesPerView: 2,
+            },
+          }}
+        >
+          {reviews.map((review, idx) => (
+            <SwiperSlide key={idx}>
+              <ReviewItem {...review} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
     </section>
   );
 };
