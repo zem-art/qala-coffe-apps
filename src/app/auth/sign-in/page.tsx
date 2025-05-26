@@ -10,7 +10,6 @@ export default function LoginPage() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const router = useRouter()
-    console.log("LoginPage rendered")
 
     useEffect(() => {
         const fetchProviders = async () => {
@@ -50,7 +49,7 @@ export default function LoginPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Email"
-                    className="w-full px-3 py-2 border rounded"
+                    className="w-full px-3 py-2 border rounded border-main hover:border-accent"
                     required
                 />
                 <input
@@ -58,12 +57,12 @@ export default function LoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
-                    className="w-full px-3 py-2 border rounded"
+                    className="w-full px-3 py-2 border rounded border-main hover:border-accent"
                     required
                 />
                     <button
                         type="submit"
-                        className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+                        className="w-full bg-main text-white py-2 rounded hover:bg-accent transition cursor-pointer"
                     >
                         Login
                     </button>
@@ -83,8 +82,20 @@ export default function LoginPage() {
                             provider.id !== "credentials" ? (
                                 <button
                                     key={provider.name}
-                                    onClick={() => signIn(provider.id)}
-                                    className="flex items-center justify-center gap-2 bg-gray-100 border border-gray-300 py-2 rounded-md hover:bg-gray-200 transition p-4 cursor-pointer"
+                                        onClick={() => signIn(provider.id)}
+                                        className={
+                                            `flex items-center justify-center gap-2 py-2 rounded-md hover:bg-accent transition p-4 cursor-pointer ${
+                                                provider.name == "Google"
+                                                    ? "bg-[#f44242] text-white hover:bg-[#e83535]"
+                                                    : provider.name == "GitHub"
+                                                        ? "bg-[#333] text-white hover:bg-[#444]"
+                                                        : provider.name == "Facebook"
+                                                            ? "bg-[#1877F2] text-white hover:bg-[#165EAB]"
+                                                            : provider.name == "Discord"
+                                                                ? "bg-[#5865F2] text-white hover:bg-[#4752C4]"
+                                                                : ""
+                                            }`
+                                        }
                                     >
                                     {/* Optional: add provider icon */}
                                     <IconRenderer
@@ -99,6 +110,17 @@ export default function LoginPage() {
                         )}
                     </div>
                 )}
+
+                <p className="mt-4 text-center text-sm">
+                    Don't have an account yet ?{' '}
+                    <button
+                        type="button"
+                        onClick={() => router.push('/auth/sign-up')}
+                        className="text-main hover:underline cursor-pointer"
+                    >
+                        Sign Up Here
+                    </button>
+                </p>
             </div>
         </div>
     )
