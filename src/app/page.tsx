@@ -13,13 +13,13 @@ import { Footer } from "./_components/footer";
 
 export default async function Home() {
   const hello = await api.post.hello({ text: "from tRPC" });
-  const session = await auth();
+  // const session = await auth();
 
-  if (session?.user) {
-    void api.post.getLatest.prefetch();
-  }
+  // if (session?.user) {
+  //   void api.post.getLatest.prefetch();
+  // }
 
-  console.log("Session: =>", session);
+  // console.log("Session: =>", session);
 
   return (
     <HydrateClient>
