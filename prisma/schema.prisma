@@ -61,6 +61,7 @@ model User {
     emailVerified DateTime?
     image         String?
     password      String?
+    passwordHash  String?
     accounts      Account[]
     sessions      Session[]
     posts         Post[]
