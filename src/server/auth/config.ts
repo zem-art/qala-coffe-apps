@@ -3,6 +3,7 @@ import { type DefaultSession, type NextAuthConfig } from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
+import bcrypt from "bcrypt"
 
 import { db } from "~/server/db";
 
@@ -56,13 +57,18 @@ export const authConfig = {
           throw new Error("Email and password are required");
         }
 
-        const user = await db.user.findFirst({
-          where: { email: credentials.email },
+        const user = await db.user.findUnique({
+          where: { email: credentials.email as string },
         });
 
-        if (!user || user.password !== credentials.password) {
-          throw new Error("Invalid email or password");
-        }
+        if (!user) return null;
+
+        const isValid = await bcrypt.compare(
+          String(credentials.password),
+          String(user.password)
+        );
+        // If you want to return the user object, you can do so here.
+        if (!isValid) return null;
 
         return {
           id: user.id,

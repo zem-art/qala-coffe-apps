@@ -44,7 +44,7 @@ export default function RegisterPage() {
       {
         onSuccess: () => {
           setLoading(false);
-          // router.push("/auth/sign-in");
+          router.push("/auth/sign-in");
         },
         onError: (err) => {
             console.error("Error during registration ==> :", err);
