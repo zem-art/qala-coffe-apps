@@ -19,6 +19,8 @@ export default async function Home() {
     void api.post.getLatest.prefetch();
   }
 
+  console.log("Session: =>", session);
+
   return (
     <HydrateClient>
       <Header />

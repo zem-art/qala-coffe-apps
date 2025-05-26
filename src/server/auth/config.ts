@@ -43,6 +43,13 @@ export const authConfig = {
      * @see https://next-auth.js.org/providers/github
      */
   ],
+  pages: {
+    // You can customize the sign-in page, error page, etc. by providing custom paths.
+    signIn: '/auth/sign-in',
+    // error: '/auth/error', // Error code passed in query string as ?error=
+    // verifyRequest: '/auth/verify-request', // Used for check email message
+    // newUser: null, // Will disable the new account creation screen
+  },
   adapter: PrismaAdapter(db),
   callbacks: {
     session: ({ session, user }) => ({
