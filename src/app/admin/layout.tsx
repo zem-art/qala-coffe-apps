@@ -1,18 +1,15 @@
-"use client";
-import React, { useState } from "react";
-import SidebarDashboard from "../_components/admin/sidebar-admin";
-import HeaderDashboard from "../_components/admin/header-admin";
+import DashboardShell from "./page";
+import { redirect } from "next/navigation";
+import { auth } from "~/server/auth";
 
-export default function MainLayout({ children }: { children: React.ReactNode }) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  // This layout is used for the admin dashboard.
+  const session = await auth(); // ✅ panggil dulu
+  console.log("AdminLayout session ==> : ", session);
+  
+  if (!session?.user) {
+    redirect("/auth/sign-in");
+  }
 
-  return (
-    <div className="flex min-h-screen">
-      <SidebarDashboard isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-      <div className="flex flex-col flex-1 md:ml-64">
-        <HeaderDashboard onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
-        <main className="flex-1 p-6 bg-gray-50 dark:bg-gray-900">{children}</main>
-      </div>
-    </div>
-  );
+  return <DashboardShell session={session}>{children}</DashboardShell>;
 }

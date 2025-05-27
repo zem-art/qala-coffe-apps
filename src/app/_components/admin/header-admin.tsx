@@ -3,6 +3,7 @@ import React from "react";
 import { IconRenderer } from "../IconRenderer";
 import ThemeToggle from "../theme_toggle";
 import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 export default function HeaderDashboard({ onToggleSidebar }: { onToggleSidebar: () => void }) {
   const router = useRouter()
@@ -43,7 +44,7 @@ export default function HeaderDashboard({ onToggleSidebar }: { onToggleSidebar: 
         </button>
         <button
           className="rounded-full p-2.5 items-center dark:bg-gray-700 text-sm dark:border-none cursor-pointer border-2 border-gray-300"
-          onClick={() => router.push("/auth/sign-in")}
+          onClick={() => signOut({ callbackUrl: '/auth/sign-in' })}
         >
           <IconRenderer
             name="FaUserCircle"

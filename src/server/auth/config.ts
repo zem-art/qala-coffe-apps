@@ -61,6 +61,8 @@ export const authConfig = {
           where: { email: credentials.email as string },
         });
 
+        console.log("User found:", user);
+
         if (!user) return null;
 
         const isValid = await bcrypt.compare(
@@ -80,27 +82,44 @@ export const authConfig = {
   ],
   session : {
     strategy: 'jwt',
+    // By default, the session duration in NextAuth.js is 30 days. You can change it to a shorter duration if needed.
+    maxAge: 7 * 24 * 60 * 60, // 7 hari
+    updateAge: 1 * 24 * 60 * 60, // refresh setiap hari
   },
   pages: {
     // You can customize the sign-in page, error page, etc. by providing custom paths.
     signIn: '/auth/sign-in',
-    // error: '/auth/error', // Error code passed in query string as ?error=
-    // verifyRequest: '/auth/verify-request', // Used for check email message
-    // newUser: null, // Will disable the new account creation screen
   },
   adapter: PrismaAdapter(db),
   callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
+    // THIS IS CODE OLD SESSION CALLBACK
+    // session: ({ session, user }) => ({
+    //   ...session,
+    //   user: {
+    //     ...session.user,
+    //     id: user.id,
+    //   },
+    // }),
+
+    async session({ session, token }) {
+      if (token?.user && session.user) {
+        session.user = {
+          ...session.user,
+          id: (token.user as { id: string }).id,
+        };
+      }
+      return session;
+    },
     // This callback is called whenever a JWT is created or updated.
     async jwt({ token, user }) {
-      if (user) token.user = user
-      return token
+      if (user) {
+        token.user = {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+        };
+      }
+    return token;
     },
   },
 } satisfies NextAuthConfig;
