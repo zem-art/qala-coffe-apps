@@ -60,8 +60,7 @@ export const authConfig = {
         const user = await db.user.findUnique({
           where: { email: credentials.email as string },
         });
-
-        console.log("User found:", user);
+        // console.log("User found:", user);
 
         if (!user) return null;
 
@@ -83,8 +82,12 @@ export const authConfig = {
   session : {
     strategy: 'jwt',
     // By default, the session duration in NextAuth.js is 30 days. You can change it to a shorter duration if needed.
-    maxAge: 7 * 24 * 60 * 60, // 7 hari
-    updateAge: 1 * 24 * 60 * 60, // refresh setiap hari
+    // maxAge: 7 * 24 * 60 * 60, // 7 hari
+    // updateAge: 1 * 24 * 60 * 60, // refresh setiap hari
+    maxAge: 24 * 60 * 60,      // 1 hari dalam detik (86400 detik)
+    updateAge: 60 * 60,        // token akan di-refresh setiap 1 jam (3600 detik)
+
+    
   },
   pages: {
     // You can customize the sign-in page, error page, etc. by providing custom paths.
