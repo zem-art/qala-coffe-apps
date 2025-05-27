@@ -17,14 +17,13 @@ export default function SidebarDashboard({ isOpen, onClose }: { isOpen: boolean;
         className={`fixed top-0 left-0 h-full w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 z-40 transform transition-transform duration-300 ease-in-out
         ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
       >
-        <div className="p-8 text-2xl font-bold text-gray-800 dark:text-white uppercase relative flex items-center">
-          qala
-          <IconRenderer
-            name="FaCoffee"
-            lib="fa"
-            size={25}
-            className="inline-block ml-4 mt-1 dark:text-background text-black"
+        <div className="p-6 pt-12 text-2xl font-bold text-gray-800 dark:text-white uppercase relative flex items-center">
+          <img
+            src="/icons/logo.png"
+            alt="Logo"
+            className="w-12 h-12 mr-2 inline-block"
           />
+          admin
           <button
             type="button"
             className="absolute top-7 right-4 cursor-pointer md:hidden bg-transparent border-none p-0"
@@ -39,6 +38,9 @@ export default function SidebarDashboard({ isOpen, onClose }: { isOpen: boolean;
             />
           </button>
         </div>
+        <a className="px-4 py-2 text-gray-600 dark:text-gray-400 text-xs font-semibold uppercase">
+          Menu
+        </a>
         <nav className="mt-4 space-y-2 px-4">
           {items.map((item, index) => (
             <a
