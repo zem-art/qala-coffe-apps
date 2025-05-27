@@ -11,7 +11,6 @@ const config: Config = {
         accent: '#657786',
         background: '#F5F8FA',
         text: '#14171A',
-        'text-primary' : '#1DA1F2'
       },
       borderRadius: {
         custom: "95% 4% 97% 5% / 4% 94% 3% 95%",
@@ -65,6 +64,7 @@ const config: Config = {
       },
     },
   },
+  darkMode: "class",
 };
 
 export default config;

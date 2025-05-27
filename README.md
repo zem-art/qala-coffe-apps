@@ -27,3 +27,10 @@ You can check out the [create-t3-app GitHub repository](https://github.com/t3-os
 ## How do I deploy this?
 
 Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+
+## Session JWT
+
+| Parameter   | Contoh           | Fungsi                                                                                                                                                                                           |
+| ----------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `maxAge`    | `86400` (1 hari) | Berapa lama session/JWT **berlaku penuh** sejak token terakhir dibuat atau di-refresh. Setelah ini, session akan expired otomatis.                                                               |
+| `updateAge` | `3600` (1 jam)   | Interval minimal **seberapa sering token akan diperbarui** saat user melakukan aktivitas di app (misal refresh halaman atau navigasi). Jika user aktif, token diperbarui agar `maxAge` di-reset. |
