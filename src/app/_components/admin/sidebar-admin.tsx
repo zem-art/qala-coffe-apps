@@ -17,9 +17,14 @@ export default function SidebarDashboard({ isOpen, onClose }: { isOpen: boolean;
         className={`fixed top-0 left-0 h-full w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 z-40 transform transition-transform duration-300 ease-in-out
         ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
       >
-        <div className="p-6 text-2xl font-bold text-gray-800 dark:text-white">
-          TailAdmin
-
+        <div className="p-8 text-2xl font-bold text-gray-800 dark:text-white uppercase relative flex items-center">
+          qala
+          <IconRenderer
+            name="FaCoffee"
+            lib="fa"
+            size={25}
+            className="inline-block ml-4 mt-1 dark:text-background text-black"
+          />
           <button
             type="button"
             className="absolute top-7 right-4 cursor-pointer md:hidden bg-transparent border-none p-0"

@@ -31,7 +31,7 @@ export default function ThemeToggle() {
         name={darkMode ? "FaSun" : "FaMoon"}
         className={darkMode ? "text-yellow-500" : "text-gray-800"}
         lib="fa"
-        size={19}
+        size={17}
         />
     </button>
   );

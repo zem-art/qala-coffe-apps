@@ -3,7 +3,7 @@ import ThemeToggle from "../theme_toggle";
 
 export default function HeaderDashboard({ onToggleSidebar }: { onToggleSidebar: () => void }) {
   return (
-    <header className="flex justify-between items-center bg-white dark:bg-gray-800 px-6 py-4 shadow">
+    <header className="flex justify-between items-center bg-white dark:bg-gray-800 px-6 py-4 shadow border-b border-gray-200 dark:border-gray-700">
       <div className="flex items-center space-x-4">
         {/* Hamburger Menu */}
         <button
@@ -27,8 +27,27 @@ export default function HeaderDashboard({ onToggleSidebar }: { onToggleSidebar: 
 
       <div className="flex items-center space-x-4">
         <ThemeToggle />
-        <button className="w-8 h-8 bg-gray-200 rounded-full" />
-        <div className="w-8 h-8 bg-blue-500 rounded-full" />
+        <button
+          className="rounded-full p-2.5 items-center dark:bg-gray-700 text-sm dark:border-none cursor-pointer border-2 border-gray-300"
+        >
+          <IconRenderer
+            name="FaBell"
+            className="text-gray-800 dark:text-white"
+            lib="fa"
+            size={17}
+            />
+        </button>
+        <button
+          className="rounded-full p-2.5 items-center dark:bg-gray-700 text-sm dark:border-none cursor-pointer border-2 border-gray-300"
+        >
+          <IconRenderer
+            name="FaUserCircle"
+            className="text-gray-800 dark:text-white"
+            lib="fa"
+            size={17}
+          />
+        </button>
+       
       </div>
     </header>
   );
