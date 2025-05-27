@@ -97,5 +97,10 @@ export const authConfig = {
         id: user.id,
       },
     }),
+    // This callback is called whenever a JWT is created or updated.
+    async jwt({ token, user }) {
+      if (user) token.user = user
+      return token
+    },
   },
 } satisfies NextAuthConfig;

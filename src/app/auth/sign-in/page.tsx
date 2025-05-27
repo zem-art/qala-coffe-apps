@@ -8,6 +8,7 @@ import { IconRenderer } from "~/app/_components/IconRenderer"
 export default function LoginPage() {
     const [providers, setProviders] = useState<Awaited<ReturnType<typeof getProviders>> | null>(null)
     const [loading, setLoading] = useState(true)
+    const [LoadingButton, setLoadingButton] = useState(false)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [errorMsg, setErrorMsg] = useState("")
@@ -32,6 +33,7 @@ export default function LoginPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setErrorMsg("")
+        setLoadingButton(true)
 
         try {
             const res:any = await signIn("credentials", {
@@ -40,15 +42,18 @@ export default function LoginPage() {
                 redirect: false,
             })
 
-            // console.log("Login successful ==> ", res)
+            console.log("Login successful ==> ", res)
             if (!res?.error && res?.ok) {
-                // router.push("/")
-                alert("Login successful! Redirecting to home page...")
+                router.push("/admin/dashboard")
+                setLoadingButton(false)
+                // alert("Login successful! Redirecting to home page...")
             } else {
                 console.error("Login failed:", res?.error)
                 setErrorMsg("Invalid email or password please check again.")
+                setLoadingButton(false)
             }
         } catch (error) {
+            setLoadingButton(false)
             console.error("Login error:", error)
             setErrorMsg("Something went wrong. Please try again.")
         }
@@ -108,9 +113,10 @@ export default function LoginPage() {
 
                     <button
                         type="submit"
+                        disabled={LoadingButton}
                         className="w-full bg-main text-white py-2 rounded hover:bg-accent transition cursor-pointer"
                     >
-                        Login
+                        {LoadingButton ? "Logging in..." : "Login"}
                     </button>
                 </form>
 
