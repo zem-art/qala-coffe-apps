@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from "react";
-import { IconRenderer } from "./IconRenderer";
+import { IconRenderer } from "../IconRenderer";
 import Navbar from "./navbar";
 
 export const Header = () => {

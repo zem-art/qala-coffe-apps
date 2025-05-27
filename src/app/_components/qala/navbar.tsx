@@ -1,7 +1,7 @@
 "use client"; // jika kamu pakai App Router (Next.js 13+)
 
 import { useState } from "react";
-import { IconRenderer } from "./IconRenderer";
+import { IconRenderer } from "../IconRenderer";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

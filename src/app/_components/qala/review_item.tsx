@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { IconRenderer } from "./IconRenderer";
+import { IconRenderer } from "../IconRenderer";
 
 interface ReviewItemProps {
   image: string;

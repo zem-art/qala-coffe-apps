@@ -1,4 +1,4 @@
-import { IconRenderer } from "./IconRenderer";
+import { IconRenderer } from "../IconRenderer";
 
 export const Footer = () => {
   const OurBranch = [
