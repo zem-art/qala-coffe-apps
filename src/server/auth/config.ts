@@ -60,7 +60,6 @@ export const authConfig = {
         const user = await db.user.findUnique({
           where: { email: credentials.email as string },
         });
-        // console.log("User found:", user);
 
         if (!user) return null;
 
