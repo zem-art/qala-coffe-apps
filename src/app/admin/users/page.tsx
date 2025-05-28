@@ -91,7 +91,7 @@ export default function UserPage() {
           value={formBody.name}
           onChange={handleChange}
           placeholder="Name"
-          className="w-full px-3 py-2 border rounded border-accent hover:border-accent dark:text-background"
+          className="w-full p-2 border border-gray-300 rounded bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600"
           required
         />
 
@@ -101,7 +101,7 @@ export default function UserPage() {
           value={formBody.email}
           onChange={handleChange}
           placeholder="Email"
-          className="w-full px-3 py-2 border rounded border-accent hover:border-accent dark:text-background"
+          className="w-full p-2 border border-gray-300 rounded bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600"
           required
         />
 
@@ -111,7 +111,7 @@ export default function UserPage() {
           value={formBody.password}
           onChange={handleChange}
           placeholder="Password"
-          className={`w-full px-3 py-2 border rounded border-accent hover:border-accent dark:text-background ${
+          className={`w-full p-2 border border-gray-300 rounded bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600 ${
             error.password ? "border-red-600" : ""
           }`}
           required

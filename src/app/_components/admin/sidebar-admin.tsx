@@ -4,7 +4,7 @@ import { IconRenderer } from "../IconRenderer";
 const items: { name: string; icon: string; lib: "fa" | "md" | "ai" | "bs"; url?: string }[] = [
   { name: "Dashboard", icon: "MdDashboard", lib: "md", url : "/admin/dashboard" },
   { name: "Admin", icon: "FaUser", lib: "fa", url: "/admin/users" },
-  { name: "Settings", icon: "MdOutlineSettings", lib: "md", url: "/admin/settings" },
+  { name: "Product", icon: "FaCoffee", lib: "fa", url: "/admin/products" },
   { name: "Reports", icon: "FaTasks", lib: "fa", url: "/admin/reports" },
 ];
 
