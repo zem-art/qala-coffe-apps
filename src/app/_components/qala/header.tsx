@@ -32,7 +32,7 @@ export const Header = () => {
       {/* Logo */}
       <a
         href="#"
-        className="text-[2.3rem] text-main font-semibold flex items-center"
+        className="text-[2.3rem] text-main font-semibold flex items-center capitalize"
       >
         qala{" "}
         <IconRenderer

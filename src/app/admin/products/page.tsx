@@ -12,7 +12,7 @@ export default function AdminMenuPage() {
 //     },
 //   });
 
-//   const { data: categories } = api.product.getCategories.useQuery();
+  // const { data: categories } = api.product.getCategories.useQuery();
 
   const [form, setForm] = useState({
     name: "",
@@ -25,6 +25,13 @@ export default function AdminMenuPage() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
+  const categories = [
+    { id : 1, name : "late"},
+    { id : 2, name : "americano"},
+    { id : 3, name : "capuchino"},
+    { id : 4, name : "choco"},
+  ]
 
 //   const handleSubmit = (e: React.FormEvent) => {
 //     e.preventDefault();
@@ -39,7 +46,7 @@ export default function AdminMenuPage() {
 
   return (
     <div className="">
-      <h2 className="text-2xl font-bold mb-4 dark:text-background">Add New Coffee Menu</h2>
+      <h2 className="text-2xl font-bold mb-4 dark:text-background">Add Coffee</h2>
       <form 
         // onSubmit={handleSubmit} 
         className="space-y-4 text-sm">
@@ -77,7 +84,7 @@ export default function AdminMenuPage() {
         />
 
         {/* Dropdown Category */}
-        {/* <select
+        <select
             name="categoryId"
             value={form.categoryId}
             onChange={handleChange}
@@ -86,11 +93,11 @@ export default function AdminMenuPage() {
         >
             <option value="" disabled>Select Category</option>
             {categories?.map((cat) => (
-            <option key={cat.id} value={cat.id}>
-                {cat.name}
-            </option>
+              <option key={cat.id} value={cat.id}>
+                  {cat.name?.toUpperCase()}
+              </option>
             ))}
-        </select> */}
+        </select>
 
         <button
             type="submit"
