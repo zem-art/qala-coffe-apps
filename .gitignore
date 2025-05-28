@@ -13,6 +13,7 @@
 /prisma/db.sqlite-journal
 /prisma/dev.db
 db.sqlite
+*.dev.db
 *.sqlite
 *.db
 
