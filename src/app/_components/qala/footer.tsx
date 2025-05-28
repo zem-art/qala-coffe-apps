@@ -2,11 +2,7 @@ import { IconRenderer } from "../IconRenderer";
 
 export const Footer = () => {
   const OurBranch = [
-    { name: "India", link: "#" },
-    { name: "USA", link: "#" },
-    { name: "France", link: "#" },
-    { name: "Africa", link: "#" },
-    { name: "Japan", link: "#" },
+    { name: "Qala Coffee", link: "#" },
   ];
 
   const QuickLinks = [

@@ -1,5 +1,5 @@
 import Image from "next/image";
-const aboutImg = "/image/about-img.png";
+const aboutImg = "/image/about-img.webp";
 const aboutIcon1 = "/image/about-icon-1.png";
 const aboutIcon2 = "/image/about-icon-2.png";
 const aboutIcon3 = "/image/about-icon-3.png";

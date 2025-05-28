@@ -13,7 +13,7 @@ export const MenuItem = ({ image, title, description, price }: MenuItemProps) =>
   return (
     <a
       href="#"
-      className="flex items-center gap-6 p-8 border border-gray-300 rounded-lg hover:border-main hover:border-dashed transition-all w-full max-w-2xl bg-background shadow-md"
+      className="flex items-center gap-6 p-8 border border-gray-300 rounded-lg hover:border-main hover:border-dashed transition-all w-full max-w-xl bg-background shadow-md"
     >
       <Image src={image} alt={title} width={40} height={40} className="h-16 w-auto object-contain" />
       <div className="text-main">

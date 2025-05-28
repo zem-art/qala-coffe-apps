@@ -6,8 +6,9 @@ const config: Config = {
       colors: {
         // main: "#443",
         main: "#9b5727",
+        secondary : "#70CAC0",
         primary: '#1DA1F2',
-        secondary: '#14171A',
+        // secondary: '#14171A',
         accent: '#657786',
         background: '#F5F8FA',
         text: '#14171A',
