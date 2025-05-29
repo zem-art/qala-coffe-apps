@@ -6,7 +6,11 @@ import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 
 export default function HeaderDashboard({ onToggleSidebar }: { onToggleSidebar: () => void }) {
-  const router = useRouter()
+  const handleLogout = async () => {
+    if(window.confirm('Are you sure you want to log out ?.')){
+      signOut({ callbackUrl: '/auth/sign-in' })
+    }
+  }
   return (
     <header className="flex justify-between items-center bg-white dark:bg-gray-800 px-6 py-4 shadow border-b border-gray-200 dark:border-gray-700">
       <div className="flex items-center space-x-4">
@@ -36,7 +40,7 @@ export default function HeaderDashboard({ onToggleSidebar }: { onToggleSidebar: 
           className="rounded-full p-2.5 items-center dark:bg-gray-700 text-sm dark:border-none cursor-pointer border-2 border-gray-300"
         >
           <IconRenderer
-            name="FaBell"
+            name="FaUserCircle"
             className="text-gray-800 dark:text-white"
             lib="fa"
             size={17}
@@ -44,10 +48,10 @@ export default function HeaderDashboard({ onToggleSidebar }: { onToggleSidebar: 
         </button>
         <button
           className="rounded-full p-2.5 items-center dark:bg-gray-700 text-sm dark:border-none cursor-pointer border-2 border-gray-300"
-          onClick={() => signOut({ callbackUrl: '/auth/sign-in' })}
+          onClick={handleLogout}
         >
           <IconRenderer
-            name="FaUserCircle"
+            name="FaDoorOpen"
             className="text-gray-800 dark:text-white"
             lib="fa"
             size={17}

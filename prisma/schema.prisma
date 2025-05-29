@@ -43,6 +43,7 @@ model Account {
     session_state            String?
     user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
     refresh_token_expires_in Int?
+    role                     String? @default("2")
 
     @@unique([provider, providerAccountId])
 }
@@ -63,6 +64,7 @@ model User {
     image         String?
     password      String?
     passwordHash  String?
+    role          String?
     accounts      Account[]
     sessions      Session[]
     posts         Post[]
@@ -77,18 +79,18 @@ model VerificationToken {
 }
 
 model Product {
-  id          Int     @id @default(autoincrement())
+  id          String     @id @default(cuid())
   name        String
   description String?
   price       Int
   imageUrl    String?
   createdAt   DateTime  @default(now())
   category    Category? @relation(fields: [categoryId], references: [id])
-  categoryId  Int?
+  categoryId  String?
 }
 
 model Category {
-  id       Int       @id @default(autoincrement())
+  id       String     @id @default(cuid())
   name     String
   products Product[]
 }

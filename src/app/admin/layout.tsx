@@ -4,12 +4,17 @@ import { auth } from "~/server/auth";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   // This layout is used for the admin dashboard.
-  const session = await auth(); // ✅ panggil dulu
+  const session:any = await auth();
   // console.log("AdminLayout session ==> : ", session);
-  
+
   if (!session?.user) {
     redirect("/auth/sign-in");
   }
 
-  return <DashboardShell session={session}>{children}</DashboardShell>;
+  if(session.user.role === '1'){
+    return <DashboardShell data_session={session}>{children}</DashboardShell>;
+  } else {
+    return redirect('/')
+  }
+
 }

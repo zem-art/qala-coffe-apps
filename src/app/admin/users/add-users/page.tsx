@@ -1,9 +1,9 @@
-"use client"
-import { api } from "~/trpc/react";
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+"use client";
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
+import { api } from '~/trpc/react';
 
-export default function RegisterPage() {
+export default function UserPage() {
   const register = api.auth.register.useMutation();
   const router = useRouter();
 
@@ -12,7 +12,7 @@ export default function RegisterPage() {
     name: "",
     email: "",
     password: "",
-    role : "2"
+    role : "1", // role = 1: admin 2: user
   });
 
   // Error state sebagai objek
@@ -45,7 +45,7 @@ export default function RegisterPage() {
       {
         onSuccess: () => {
           setLoading(false);
-          router.push("/auth/sign-in");
+          router.replace('/admin/users')
         },
         onError: (err) => {
             console.error("Error during registration ==> :", err);
@@ -74,13 +74,11 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen px-4">
+    <>
       <form
         onSubmit={handleRegister}
-        className="bg-white p-6 rounded shadow w-full max-w-md space-y-4"
+        className="rounded w-full space-y-4"
       >
-        <h1 className="text-2xl font-bold text-center">Register</h1>
-
         {/* Error general */}
         {error.general && (
           <div className="text-red-600 bg-red-100 px-3 py-2 rounded text-sm">
@@ -94,7 +92,7 @@ export default function RegisterPage() {
           value={formBody.name}
           onChange={handleChange}
           placeholder="Name"
-          className="w-full px-3 py-2 border rounded border-main hover:border-accent"
+          className="w-full p-2 border border-gray-300 rounded bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600"
           required
         />
 
@@ -104,7 +102,7 @@ export default function RegisterPage() {
           value={formBody.email}
           onChange={handleChange}
           placeholder="Email"
-          className="w-full px-3 py-2 border rounded border-main hover:border-accent"
+          className="w-full p-2 border border-gray-300 rounded bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600"
           required
         />
 
@@ -114,7 +112,7 @@ export default function RegisterPage() {
           value={formBody.password}
           onChange={handleChange}
           placeholder="Password"
-          className={`w-full px-3 py-2 border rounded border-main hover:border-accent ${
+          className={`w-full p-2 border border-gray-300 rounded bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600 ${
             error.password ? "border-red-600" : ""
           }`}
           required
@@ -128,22 +126,11 @@ export default function RegisterPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-main text-white py-2 rounded hover:bg-main transition disabled:opacity-50 cursor-pointer"
+          className="w-full bg-secondary text-white py-2 rounded hover:bg-accent transition disabled:opacity-50 cursor-pointer"
         >
-          {loading ? "Registering..." : "Register"}
+          {loading ? "Registering Admin..." : "Register Admin"}
         </button>
-
-        <p className="mt-4 text-center text-sm">
-          Already have an account?{" "}
-          <button
-            type="button"
-            onClick={() => router.push("/auth/sign-in")}
-            className="text-main hover:underline cursor-pointer"
-          >
-            Login here
-          </button>
-        </p>
       </form>
-    </div>
+    </>
   );
 }

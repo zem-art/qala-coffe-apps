@@ -134,7 +134,7 @@ export default function LoginPage() {
                     </div>
                 )}
 
-                {/* <p className="mt-4 text-center text-sm">
+                <p className="mt-4 text-center text-sm">
                     Don't have an account yet ? {" "}
                     <button
                         type="button"
@@ -143,7 +143,7 @@ export default function LoginPage() {
                     >
                         Sign Up Here
                     </button>
-                </p> */}
+                </p>
             </div>
         </div>
     )
