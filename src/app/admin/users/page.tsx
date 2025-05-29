@@ -70,7 +70,7 @@ export default function ListUsers() {
                   <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background">{dtx?.name}</td>
                   <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background">{dtx?.email}</td>
                   <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background">
-                    {dtx.role === '1' ? 'admin' : 'user'}
+                    {dtx.role === '1' ? 'admin' : 'customer'}
                   </td>
                   <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background">
                     <IconRenderer

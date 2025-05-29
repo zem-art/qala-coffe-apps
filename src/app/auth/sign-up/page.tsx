@@ -12,6 +12,7 @@ export default function RegisterPage() {
     name: "",
     email: "",
     password: "",
+    role : "2"
   });
 
   // Error state sebagai objek
