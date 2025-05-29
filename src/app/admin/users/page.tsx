@@ -1,136 +1,88 @@
 "use client";
+import { api } from "~/trpc/react";
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import { api } from '~/trpc/react';
+import TableSkeletonRow from "~/app/_components/skeleton";
+import { IconRenderer } from "~/app/_components/IconRenderer";
 
-export default function UserPage() {
-  const register = api.auth.register.useMutation();
+export default function ListUsers() {
+  const { data: users, isLoading } = api.auth.getUsers.useQuery();
   const router = useRouter();
 
-  // Form state sebagai objek
-  const [formBody, setFormBody] = useState({
-    name: "",
-    email: "",
-    password: "",
-    role : "1", // role = 1: admin 2: user
-  });
-
-  // Error state sebagai objek
-  const [error, setError] = useState<{ general?: string; password?: string; name?: string }>({});
-  const [loading, setLoading] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormBody({
-      ...formBody,
-      [e.target.name]: e.target.value,
-    });
-
-    // Clear error on change (optional)
-    setError({});
-  };
-
-  const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError({});
-    setLoading(true);
-
-    if (formBody.password.length < 6) {
-      setError({ password: "Password minimal 6 karakter." });
-      setLoading(false);
-      return;
-    }
-
-    register.mutate(
-      formBody,
-      {
-        onSuccess: () => {
-          setLoading(false);
-          window.location.reload()
-        },
-        onError: (err) => {
-            console.error("Error during registration ==> :", err);
-            setError({ general: err.message });
-            setLoading(false);
-        },
-        // onError: (error) => {
-        //     // error bentuknya tRPC error, bisa cek di `error.data?.zodError`
-        //     if (error.data?.zodError) {
-        //         // error dari Zod validasi, biasanya ada bentuk seperti array kamu kasih
-        //         const zodErrors = error.data.zodError.fieldErrors;
-        //     // Contoh ambil error untuk field name
-        //     if (zodErrors.name && zodErrors.name.length > 0) {
-        //         setError({ name: zodErrors.name[0] });
-        //     } else {
-        //         setError({ general: error.message });
-        //     }
-        //     } else {
-        //         // error umum dari backend
-        //         setError({ general: error.message });
-        //     }
-        //     setLoading(false);
-        // },
-      }
-    );
-  };
+  const title_header = ["no", "name", "email", "role", "verification", "action"];
 
   return (
-    <>
-      <form
-        onSubmit={handleRegister}
-        className="rounded w-full space-y-4"
-      >
-        {/* Error general */}
-        {error.general && (
-          <div className="text-red-600 bg-red-100 px-3 py-2 rounded text-sm">
-            {error.general}
-          </div>
-        )}
-
-        <input
-          type="text"
-          name="name"
-          value={formBody.name}
-          onChange={handleChange}
-          placeholder="Name"
-          className="w-full p-2 border border-gray-300 rounded bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600"
-          required
-        />
-
-        <input
-          type="email"
-          name="email"
-          value={formBody.email}
-          onChange={handleChange}
-          placeholder="Email"
-          className="w-full p-2 border border-gray-300 rounded bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600"
-          required
-        />
-
-        <input
-          type="password"
-          name="password"
-          value={formBody.password}
-          onChange={handleChange}
-          placeholder="Password"
-          className={`w-full p-2 border border-gray-300 rounded bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600 ${
-            error.password ? "border-red-600" : ""
-          }`}
-          required
-        />
-
-        {/* Error password */}
-        {error.password && (
-          <div className="text-red-600 text-sm">{error.password}</div>
-        )}
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-secondary text-white py-2 rounded hover:bg-accent transition disabled:opacity-50 cursor-pointer"
+    <div className="p-4">
+      <div className="flex items-center justify-between pb-4">
+        <h2 className="text-2xl font-bold mb-4 dark:text-background uppercase">list users</h2>
+        {/* <button
+          className="p-2 rounded-sm bg-secondary hover:bg-accent cursor-pointer"
+          onClick={() => router.push("/admin/products/add-product")}
         >
-          {loading ? "Registering Admin..." : "Register Admin"}
-        </button>
-      </form>
-    </>
+          <span className="text-black dark:text-background uppercase">add product</span>
+        </button> */}
+      </div>
+
+      <div className="overflow-x-auto">
+        <table className="min-w-full border rounded border-black dark:border-gray-700 text-sm">
+          <thead className="bg-gray-100 dark:bg-gray-800 h-15">
+            <tr>
+              {title_header.map((val, idx) => (
+                <th
+                  key={idx}
+                  className="px-4 py-2 border-b dark:border-gray-700 text-left dark:text-background uppercase"
+                >
+                  {val}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {isLoading ? (
+              Array.from({ length: 5 }).map((_, i) => (
+                <TableSkeletonRow key={i} cols={title_header.length} />
+              ))
+            ) : users?.length === 0 ? (
+              <tr>
+                <td
+                  colSpan={title_header.length}
+                  className="px-4 py-4 text-center text-gray-500 dark:text-gray-400"
+                >
+                  No Users found.
+                </td>
+              </tr>
+            ) : (
+              users?.map((dtx, i) => (
+                <tr
+                  key={dtx.id}
+                  className="hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer"
+                >
+                  <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background">{i + 1}</td>
+                  <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background">{dtx.name}</td>
+                  <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background">{dtx?.email}</td>
+                  <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background">
+                    {dtx.role === '1' ? 'admin' : 'user'}
+                  </td>
+                  <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background">
+                    <IconRenderer
+                      lib="fa"
+                      name={dtx.emailVerified ? "FaCheckCircle" : "FaTimes"}
+                    />
+                  </td>
+                  <td className="px-4 py-2 border-b dark:border-gray-700">
+                    <button className="px-2 py-1 text-xs bg-yellow-500 text-white rounded mr-2 hover:bg-yellow-600">
+                      Edit
+                    </button>
+                    <button className="px-2 py-1 text-xs bg-red-500 text-white rounded hover:bg-red-600">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }

@@ -51,5 +51,9 @@ export const authRouter = createTRPCRouter({
           email: newUser.email,
         },
       };
-    }),  
+    }),
+
+  getUsers: publicProcedure.query(async ({ ctx }) => {
+    return await ctx.db.user.findMany();
+  }),
 });
