@@ -1,113 +1,63 @@
 
 "use client";
+import { redirect } from 'next/dist/server/api-utils';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { api } from "~/trpc/react";
 
-export default function AdminMenuPage() {
-  const utils = api.useUtils();
-  const createProduct = api.product.create.useMutation({
-    onSuccess: () => {
-      utils.invalidate();
-      setTimeout(() => {
-        window.location.reload()
-      }, 1000);
-    },
-  });
+export default function ListProduct() {
+  const { data: products } = api.product.getProducts.useQuery()
 
-  const { data: categories } = api.product.getCategories.useQuery();
+  const title_header = [
+    'no',
+    'product',
+    'category',
+    'price',
+    'stock',
+    'action'
+  ]
 
-  const [form, setForm] = useState({
-    name: "",
-    description: "",
-    price: "",
-    imageUrl: "",
-    categoryId: "", // ⬅️ new
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    createProduct.mutate({
-      name: form.name,
-      description: form.description,
-      price: parseFloat(form.price),
-      imageUrl: form.imageUrl,
-      categoryId: parseInt(form.categoryId),
-    });
-  };
-
+  const router = useRouter()
   return (
-    <div className="">
-      <div className='flex items-center justify-between pb-4'>
-        <h2 className="text-2xl font-bold mb-4 dark:text-background uppercase">add coffee</h2>
-        <button className='p-2 rounded-sm bg-secondary hover:bg-accent cursor-pointer'>
-          <a className='text-black dark:text-background uppercase'>
-            add category
-          </a>
+    <div className="p-4">
+      <div className="flex items-center justify-between pb-4">
+        <h2 className="text-2xl font-bold mb-4 dark:text-background uppercase">list coffee</h2>
+        <button className="p-2 rounded-sm bg-secondary hover:bg-accent cursor-pointer" onClick={() => router.push('/admin/products/add-product')}>
+          <a className="text-black dark:text-background uppercase">add product</a>
         </button>
       </div>
-      <form 
-        onSubmit={handleSubmit}
-        className="space-y-4 text-sm">
-        <input
-          name="name"
-          placeholder="Name"
-          value={form.name}
-          onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600"
-          required
-        />
-        <input
-          name="price"
-          placeholder="Price"
-          value={form.price}
-          onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600"
-          required
-          type="number"
-          step="0.01"
-        />
-        {/* <input
-            name="imageUrl"
-            placeholder="Image URL"
-            value={form.imageUrl}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600"
-        /> */}
-        <textarea
-          name="description"
-          placeholder="Description"
-          value={form.description}
-          onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600"
-        />
 
-        {/* Dropdown Category */}
-        <select
-          name="categoryId"
-          value={form.categoryId}
-          onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded bg-white text-black dark:bg-gray-800 dark:text-white dark:border-gray-600"
-          required
-        >
-          <option value="" disabled>Select Category</option>
-          {categories?.map((cat) => (
-            <option key={cat.id} value={cat.id}>
-              {cat.name?.toUpperCase()}
-            </option>
-          ))}
-        </select>
-
-        <button
-            type="submit"
-            className="w-full bg-secondary text-white p-2 rounded hover:bg-accent transition disabled:opacity-50 cursor-pointer uppercase"
-        >
-            save product
-        </button>
-        </form>
+      <div className="overflow-x-auto">
+        <table className="min-w-full border rounded border-black dark:border-gray-700 text-sm">
+          <thead className="bg-gray-100 dark:bg-gray-800 h-15">
+            <tr>
+              {title_header.map((val, idx) => (
+                <th key={idx} className="px-4 py-2 border-b dark:border-gray-700 text-left dark:text-background uppercase">{val}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {/* Contoh dummy data */}
+            {products?.map((product, i) => (
+              <tr key={product.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer">
+                <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background h-10">{i + 1}</td>
+                <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background h-10">{product.name}</td>
+                <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background h-10">{product?.category?.name}</td>
+                <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background h-10">Rp{product.price.toLocaleString()}</td>
+                <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background h-10">0</td>
+                <td className="px-4 py-2 border-b dark:border-gray-700">
+                  <button className="px-2 py-1 text-xs bg-yellow-500 text-white rounded mr-2 hover:bg-yellow-600">
+                    Edit
+                  </button>
+                  <button className="px-2 py-1 text-xs bg-red-500 text-white rounded hover:bg-red-600">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

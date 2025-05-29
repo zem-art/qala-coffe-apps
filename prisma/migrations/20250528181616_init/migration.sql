@@ -23,6 +23,7 @@ CREATE TABLE "Account" (
     "id_token" TEXT,
     "session_state" TEXT,
     "refresh_token_expires_in" INTEGER,
+    "role" TEXT DEFAULT '2',
     CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -43,7 +44,8 @@ CREATE TABLE "User" (
     "emailVerified" DATETIME,
     "image" TEXT,
     "password" TEXT,
-    "passwordHash" TEXT
+    "passwordHash" TEXT,
+    "role" TEXT
 );
 
 -- CreateTable
@@ -55,19 +57,19 @@ CREATE TABLE "VerificationToken" (
 
 -- CreateTable
 CREATE TABLE "Product" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" TEXT NOT NULL PRIMARY KEY,
     "name" TEXT NOT NULL,
     "description" TEXT,
     "price" INTEGER NOT NULL,
     "imageUrl" TEXT,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "categoryId" INTEGER,
+    "categoryId" TEXT,
     CONSTRAINT "Product_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 -- CreateTable
 CREATE TABLE "Category" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" TEXT NOT NULL PRIMARY KEY,
     "name" TEXT NOT NULL
 );
 

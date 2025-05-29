@@ -12,6 +12,7 @@ export default function UserPage() {
     name: "",
     email: "",
     password: "",
+    role : "1", // role = 1: admin 2: user
   });
 
   // Error state sebagai objek

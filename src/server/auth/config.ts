@@ -19,6 +19,7 @@ declare module "next-auth" {
       id: string;
       // ...other properties
       // role: UserRole;
+      role : string;
     } & DefaultSession["user"];
   }
 
@@ -74,6 +75,7 @@ export const authConfig = {
           id: user.id,
           name: user.name,
           email: user.email,
+          role : user.role,
         };
       }
     }),
@@ -105,20 +107,24 @@ export const authConfig = {
 
     async session({ session, token }) {
       if (token?.user && session.user) {
+        // console.log('==>', token)
         session.user = {
           ...session.user,
           id: (token.user as { id: string }).id,
+          role: (token.user as any).role,
         };
       }
       return session;
     },
     // This callback is called whenever a JWT is created or updated.
     async jwt({ token, user }) {
+      // console.log('==>> ', user)
       if (user) {
         token.user = {
           id: user.id,
           name: user.name,
           email: user.email,
+          role: (user as any).role,
         };
       }
     return token;

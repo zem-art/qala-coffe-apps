@@ -48,11 +48,11 @@ export const Header = () => {
 
       {/* Book Button */}
       <a
-        href="#"
+        href={'/auth/sign-in'}
         className="relative hidden md:inline-block px-6 py-2 text-main group"
       >
         <span className="absolute inset-0 border-2 border-main rounded transition-all duration-500 group-hover:border-dashed group-hover:scale-x-110"></span>
-        <span className="relative z-10">Book A Table</span>
+        <span className="relative z-10">Sign In or Up</span>
       </a>
     </header>
   );

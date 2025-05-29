@@ -10,10 +10,11 @@ export const authRouter = createTRPCRouter({
         name: z.string().min(1, "Name is required"),
         email: z.string().email("Must be a valid email"),
         password: z.string().min(6, "Password must be at least 6 characters"),
+        role : z.string().optional().default("2")
       }
     ))
     .mutation(async ({ input, ctx }) => {
-      const { name, email, password } = input;
+      const { name, email, password, role } = input;
       // console.log(" Request Dari Body : ", input);
 
       // Cek apakah email sudah digunakan
@@ -38,6 +39,7 @@ export const authRouter = createTRPCRouter({
           email,
           password: hashedPassword,
           passwordHash : password, // Simpan password asli untuk keperluan verifikasi
+          role : role,
         },
       });
 

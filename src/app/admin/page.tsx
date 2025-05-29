@@ -1,19 +1,27 @@
-// app/(admin)/_components/dashboard-shell.tsx
 "use client";
 import React, { useState } from "react";
 import SidebarDashboard from "../_components/admin/sidebar-admin";
 import HeaderDashboard from "../_components/admin/header-admin";
+import { Spinner } from "../_components/spinner";
+import { useSession } from "next-auth/react";
 
 export default function DashboardShell({
   children,
-  session,
+  data_session,
 }: {
   children: React.ReactNode;
-  session: any;
+  data_session: any;
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { data: sessions, status } = useSession();
 
-  console.log("DashboardShell session:", session.user.email);
+  if (status === "loading") {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Spinner />
+      </div>
+    )
+  }
 
   return (
     <div className="flex min-h-screen">
