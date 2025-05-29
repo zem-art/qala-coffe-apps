@@ -1,26 +1,35 @@
 "use client";
 import { api } from "~/trpc/react";
-import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import TableSkeletonRow from "~/app/_components/skeleton";
+import { useRouter } from 'next/navigation';
+import { useSession } from "next-auth/react";
 import { IconRenderer } from "~/app/_components/IconRenderer";
+import TableSkeletonRow from "~/app/_components/skeleton";
 
 export default function ListUsers() {
-  const { data: users, isLoading } = api.auth.getUsers.useQuery();
   const router = useRouter();
-
+  const { data: session, status } = useSession();
+  const { data: users, isLoading } = api.auth.getUsers.useQuery();
+  const deleteUser = api.auth.deleteUser.useMutation();
   const title_header = ["no", "name", "email", "role", "verification", "action"];
+
+  const handleDeleteUser = async (id:string) => {
+    if(window.confirm('are you sure you want to delete')){
+      await deleteUser.mutateAsync({ id })
+      window.location.reload()
+    }
+  }
 
   return (
     <div className="p-4">
       <div className="flex items-center justify-between pb-4">
         <h2 className="text-2xl font-bold mb-4 dark:text-background uppercase">list users</h2>
-        {/* <button
+        <button
           className="p-2 rounded-sm bg-secondary hover:bg-accent cursor-pointer"
-          onClick={() => router.push("/admin/products/add-product")}
+          onClick={() => router.push("/admin/users/add-users")}
         >
-          <span className="text-black dark:text-background uppercase">add product</span>
-        </button> */}
+          <span className="text-black dark:text-background uppercase">add admin</span>
+        </button>
       </div>
 
       <div className="overflow-x-auto">
@@ -46,7 +55,7 @@ export default function ListUsers() {
               <tr>
                 <td
                   colSpan={title_header.length}
-                  className="px-4 py-4 text-center text-gray-500 dark:text-gray-400"
+                  className="px-4 py-4 text-center text-red-600 dark:text-background"
                 >
                   No Users found.
                 </td>
@@ -58,7 +67,7 @@ export default function ListUsers() {
                   className="hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer"
                 >
                   <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background">{i + 1}</td>
-                  <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background">{dtx.name}</td>
+                  <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background">{dtx?.name}</td>
                   <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background">{dtx?.email}</td>
                   <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background">
                     {dtx.role === '1' ? 'admin' : 'user'}
@@ -70,13 +79,17 @@ export default function ListUsers() {
                     />
                   </td>
                   <td className="px-4 py-2 border-b dark:border-gray-700">
-                    <button className="px-2 py-1 text-xs bg-yellow-500 text-white rounded mr-2 hover:bg-yellow-600">
-                      Edit
-                    </button>
-                    <button className="px-2 py-1 text-xs bg-red-500 text-white rounded hover:bg-red-600">
-                      Delete
-                    </button>
-                  </td>
+                    <button onClick={() => handleDeleteUser(dtx.id || '')}>
+                      {dtx?.email !== session?.user?.email && (
+                        <IconRenderer
+                          lib="fa"
+                          name="FaTrash"
+                          size={20}
+                          className="text-red-500 cursor-pointer"
+                          />
+                        )}
+                      </button>
+                    </td>
                 </tr>
               ))
             )}

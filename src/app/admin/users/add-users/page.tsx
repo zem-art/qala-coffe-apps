@@ -45,7 +45,7 @@ export default function UserPage() {
       {
         onSuccess: () => {
           setLoading(false);
-          window.location.reload()
+          router.replace('/admin/users')
         },
         onError: (err) => {
             console.error("Error during registration ==> :", err);

@@ -56,4 +56,12 @@ export const authRouter = createTRPCRouter({
   getUsers: publicProcedure.query(async ({ ctx }) => {
     return await ctx.db.user.findMany();
   }),
+
+  deleteUser : publicProcedure
+    .input(z.object({ id : z.string()}))
+    .mutation(async ({ input, ctx}) => {
+      return await ctx.db.user.delete({
+        where : { id : input.id }
+      })
+    })
 });

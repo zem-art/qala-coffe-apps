@@ -7,7 +7,6 @@ import TableSkeletonRow from "~/app/_components/skeleton";
 export default function ListProduct() {
   const { data: products, isLoading } = api.product.getProducts.useQuery();
   const router = useRouter();
-
   const title_header = ["no", "product", "category", "price", "stock", "action"];
 
   return (
