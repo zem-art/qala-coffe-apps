@@ -22,6 +22,9 @@ export const productRouter = createTRPCRouter({
       include: {
         category: true, // ⬅️ join ke table Category
       },
+      orderBy : {
+        createdAt : "desc"
+      }
     });
   }),
 
