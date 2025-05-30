@@ -1,40 +1,25 @@
 "use client";
 import { api } from "~/trpc/react";
-import { useRouter } from 'next/navigation';
-import React, { useMemo, useState } from 'react';
+import React, { useState } from "react";
 import TableSkeletonRow from "~/app/_components/skeleton";
 
-// NOTE: this is code list data with client-side pagination
+// NOTE: this is code list data with server-side pagination
+
+const PAGE_SIZE = 7;
 
 export default function ListProduct() {
-  const { data: products, isLoading } = api.product.getProducts.useQuery();
-  const router = useRouter();
-  const title_header = ["no", "product", "category", "price", "action"];
-
   const [page, setPage] = useState(1);
-  const PAGE_SIZE = 7;
+  const { data, isLoading } = api.product.getProducts.useQuery(
+    { page, pageSize: PAGE_SIZE },
+    { keepPreviousData: true } // supaya UI stabil saat loading page baru
+  );
 
-  // Slice data sesuai page
-  const paginatedProducts = useMemo(() => {
-    if (!products) return [];
-    const start = (page - 1) * PAGE_SIZE;
-    return products.slice(start, start + PAGE_SIZE);
-  }, [products, page]);
+  const title_header = ["no", "product", "category", "price", "stock", "action"];
 
-  const totalPages = products ? Math.ceil(products.length / PAGE_SIZE) : 0;
+  const totalPages = data ? Math.ceil(data.total / PAGE_SIZE) : 0;
 
   return (
     <div className="p-4">
-      <div className="flex items-center justify-between pb-4">
-        <h2 className="text-2xl font-bold mb-4 dark:text-background uppercase">list coffee</h2>
-        <button
-          className="p-2 rounded-sm bg-secondary hover:bg-accent cursor-pointer"
-          onClick={() => router.push("/admin/products/add-product")}
-        >
-          <span className="text-black dark:text-background uppercase">add product</span>
-        </button>
-      </div>
-
       <div className="overflow-x-auto">
         <table className="min-w-full border rounded border-black dark:border-gray-700 text-sm">
           <thead className="bg-gray-100 dark:bg-gray-800 h-15">
@@ -54,7 +39,7 @@ export default function ListProduct() {
               Array.from({ length: PAGE_SIZE }).map((_, i) => (
                 <TableSkeletonRow key={i} cols={title_header.length} />
               ))
-            ) : products?.length === 0 ? (
+            ) : data?.items.length === 0 ? (
               <tr>
                 <td
                   colSpan={title_header.length}
@@ -64,7 +49,7 @@ export default function ListProduct() {
                 </td>
               </tr>
             ) : (
-              paginatedProducts.map((product, i) => (
+              data?.items.map((product, i) => (
                 <tr
                   key={product.id}
                   className="hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer"
@@ -72,18 +57,18 @@ export default function ListProduct() {
                   <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background">
                     {(page - 1) * PAGE_SIZE + i + 1}
                   </td>
-                  <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background uppercase">
+                  <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background">
                     {product.name}
                   </td>
-                  <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background capitalize">
+                  <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background">
                     {product?.category?.name}
                   </td>
                   <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background">
-                    Rp {product.price.toLocaleString()}
+                    Rp{product.price.toLocaleString()}
                   </td>
-                  {/* <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background">
+                  <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background">
                     0
-                  </td> */}
+                  </td>
                   <td className="px-4 py-2 border-b dark:border-gray-700">
                     <button className="px-2 py-1 text-xs bg-yellow-500 text-white rounded mr-2 hover:bg-yellow-600">
                       Edit
@@ -103,15 +88,17 @@ export default function ListProduct() {
           <button
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page === 1}
-            className="px-3 py-1 border dark:border-background dark:text-background rounded disabled:opacity-50"
+            className="px-3 py-1 border rounded disabled:opacity-50"
           >
             Prev
           </button>
-          <span className="px-3 py-1 dark:text-background">{page} / {totalPages}</span>
+          <span className="px-3 py-1">
+            {page} / {totalPages}
+          </span>
           <button
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             disabled={page === totalPages}
-            className="px-3 py-1 border dark:border-background dark:text-background rounded disabled:opacity-50"
+            className="px-3 py-1 border rounded disabled:opacity-50"
           >
             Next
           </button>

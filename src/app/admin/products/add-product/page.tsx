@@ -39,9 +39,9 @@ export default function AddProduct() {
             await createProduct.mutateAsync({
                 name: form.name,
                 description: form.description,
-                price: parseFloat(form.price),
+                price: form.price,
                 imageUrl: form.imageUrl,
-                categoryId : form.categoryId,
+                categoryId : parseInt(form.categoryId),
             });
 
             await utils.invalidate();
