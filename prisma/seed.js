@@ -4,6 +4,8 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
+
+  // insert user
   // // Hash password
   const password = "password"
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -16,6 +18,18 @@ async function main() {
       role : "1",
     },
   });
+
+  // insert category
+  await prisma.category.createMany({
+    data: [
+      { name: "Espresso Based" },
+      { name: "Manual Brew" },
+      { name: "Kopi Susu & Lokal" },
+      { name: "Iced Coffee" },
+      { name: "Signature / Flavored Coffee" }
+    ]
+  })
+
 }
 
 main()
