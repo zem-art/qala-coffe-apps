@@ -7,7 +7,7 @@ export function renderTableHeader(headers: string[]) {
         {headers.map((val, idx) => (
           <th
             key={idx}
-            className="px-4 py-2 border-b dark:border-gray-700 text-left dark:text-background uppercase"
+            className="px-4 py-2 border-b border-b-accent dark:border-gray-700 text-left dark:text-background uppercase"
           >
             {val}
           </th>

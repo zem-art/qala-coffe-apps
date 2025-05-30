@@ -31,14 +31,14 @@ export default function ListProduct() {
         <h2 className="text-2xl font-bold mb-4 dark:text-background uppercase">list coffee</h2>
         <button
           className="p-2 rounded-sm bg-secondary hover:bg-accent cursor-pointer"
-          onClick={() => router.push("/admin/products/add-product")}
+          onClick={() => router.push("/admin/products/new")}
         >
           <span className="text-black dark:text-background uppercase">add product</span>
         </button>
       </div>
 
       <div className="overflow-x-auto">
-        <table className="min-w-full border rounded border-black dark:border-gray-700 text-sm">
+        <table className="min-w-full border border-accent dark:border-gray-700 text-sm">
           {renderTableHeader(title_header)}
           <tbody>
             {renderTableBodyDefault({
@@ -51,20 +51,20 @@ export default function ListProduct() {
                   key={product.id}
                   className="hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer"
                 >
-                  <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background">
+                  <td className="px-4 py-3 border-b border-b-accent dark:border-gray-700 dark:text-background">
                     {(currentPage - 1) * PAGE_SIZE + i + 1}
                   </td>
-                  <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background uppercase">
+                  <td className="px-4 py-3 border-b border-b-accent dark:border-gray-700 dark:text-background uppercase">
                     {product.name}
                   </td>
-                  <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background capitalize">
+                  <td className="px-4 py-3 border-b border-b-accent dark:border-gray-700 dark:text-background capitalize">
                     {product?.category?.name}
                   </td>
-                  <td className="px-4 py-4 border-b dark:border-gray-700 dark:text-background">
+                  <td className="px-4 py-3 border-b border-b-accent dark:border-gray-700 dark:text-background">
                     {formatCurrency(product.price, "IDR")}
                   </td>
-                  <td className="px-4 py-2 border-b dark:border-gray-700">
-                    <button className="px-2 py-1 text-xs bg-yellow-500 text-white rounded mr-2 hover:bg-yellow-600 cursor-pointer">
+                  <td className="px-4 py-3 border-b border-b-accent dark:border-gray-700">
+                    <button onClick={() => router.push(`/admin/products/${product.id}`)} className="px-2 py-1 text-xs bg-yellow-500 text-white rounded mr-2 hover:bg-yellow-600 cursor-pointer">
                       Edit
                     </button>
                     <button onClick={() => handleDeleteProduct(product.id || '')} className="px-2 py-1 text-xs bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer">

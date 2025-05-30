@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { boolean, z } from "zod";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
 export const productRouter = createTRPCRouter({
@@ -73,5 +73,14 @@ export const productRouter = createTRPCRouter({
         where: { id: input.id },
       });
     }),
+
+    getById: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ input, ctx }) => {
+      return await ctx.db.product.findUnique({
+        where: { id: input.id },
+      });
+    }),
+
 });
 
