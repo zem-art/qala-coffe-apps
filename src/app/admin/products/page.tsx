@@ -6,6 +6,7 @@ import { renderTableHeader } from "~/app/_components/table/table-header";
 import { useClientPagination } from "~/utils/hooks/useClientPaginationClientSide";
 import { renderTableBodyDefault } from "~/app/_components/table/table-body";
 import formatCurrency from "~/utils/hooks/formatCurrency";
+import { IconRenderer } from '~/app/_components/IconRenderer';
 
 // NOTE: this is code list data with client-side pagination
 
@@ -64,11 +65,21 @@ export default function ListProduct() {
                     {formatCurrency(product.price, "IDR")}
                   </td>
                   <td className="px-4 py-3 border-b border-b-accent dark:border-gray-700">
-                    <button onClick={() => router.push(`/admin/products/${product.id}`)} className="px-2 py-1 text-xs bg-yellow-500 text-white rounded mr-2 hover:bg-yellow-600 cursor-pointer">
-                      Edit
+                    <button onClick={() => router.push(`/admin/products/${product.id}`)} className="text-xs text-white rounded mr-2">
+                      <IconRenderer
+                        lib="fa"
+                        name="FaPen"
+                        size={20}
+                        className="text-secondary hover:text-sky-700 dark:hover:text-sky-700 cursor-pointer"
+                        />
                     </button>
-                    <button onClick={() => handleDeleteProduct(product.id || '')} className="px-2 py-1 text-xs bg-red-500 text-white rounded hover:bg-red-600 cursor-pointer">
-                      Delete
+                    <button onClick={() => handleDeleteProduct(product.id || '')} className="text-xs text-white rounded">
+                      <IconRenderer
+                        lib="fa"
+                        name="FaTrash"
+                        size={20}
+                        className="text-red-400 hover:text-red-700 dark:hover:text-red-700 cursor-pointer"
+                        />
                     </button>
                   </td>
                 </tr>
