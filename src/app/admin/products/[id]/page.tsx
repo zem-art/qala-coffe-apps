@@ -138,6 +138,7 @@ export default function AddOrEditProduct() {
                     name="description"
                     placeholder="Description"
                     value={form.description}
+                    rows={6}
                     onChange={handleChange}
                     className="w-full p-2 border rounded bg-background text-black dark:bg-gray-800 dark:text-white dark:border-accent border-accent"
                 />

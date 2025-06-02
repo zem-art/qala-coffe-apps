@@ -5,7 +5,6 @@ const items: { name: string; icon: string; lib: "fa" | "md" | "ai" | "bs"; url?:
   { name: "Dashboard", icon: "MdDashboard", lib: "md", url : "/admin/dashboard" },
   { name: "User", icon: "FaUser", lib: "fa", url: "/admin/users" },
   { name: "Product", icon: "FaCoffee", lib: "fa", url: "/admin/products" },
-  { name: "Reports", icon: "FaTasks", lib: "fa", url: "/admin/reports" },
 ];
 
 export default function SidebarDashboard({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {

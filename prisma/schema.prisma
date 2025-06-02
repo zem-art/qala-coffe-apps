@@ -94,3 +94,12 @@ model Category {
   name     String
   products Product[]
 }
+
+model Bokking {
+    id              String      @id @default(cuid())
+    name            String
+    email           String
+    number          Int
+    message         String
+    createdAt       DateTime    @default(now())
+}

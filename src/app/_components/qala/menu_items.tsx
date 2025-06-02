@@ -9,7 +9,7 @@ interface MenuItemProps {
 }
 
 export const MenuItem = ({ image, title, description, price }: MenuItemProps) => {
-  const lengthLimit = 70;
+  const lengthLimit = 110;
   return (
     <a
       href="#"

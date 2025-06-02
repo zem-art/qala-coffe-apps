@@ -16,6 +16,14 @@ export const productRouter = createTRPCRouter({
       return await ctx.db.product.create({ data: input });
     }),
 
+  getProductsPublic: publicProcedure.query(async ({ ctx }) => {
+    return await ctx.db.product.findMany({
+      include: {
+        category: true, // ⬅️ join ke table Category
+      },
+    });
+  }),
+
   // NOTE : client-side pagination
   getProducts: publicProcedure.query(async ({ ctx }) => {
     return await ctx.db.product.findMany({
