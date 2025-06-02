@@ -73,6 +73,27 @@ CREATE TABLE "Category" (
     "name" TEXT NOT NULL
 );
 
+-- CreateTable
+CREATE TABLE "Bokking" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "number" INTEGER NOT NULL,
+    "message" TEXT NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- CreateTable
+CREATE TABLE "Review" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "name" TEXT NOT NULL,
+    "role" TEXT,
+    "image" TEXT,
+    "message" TEXT NOT NULL,
+    "rating" INTEGER NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 -- CreateIndex
 CREATE INDEX "Post_name_idx" ON "Post"("name");
 

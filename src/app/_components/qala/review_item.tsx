@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { IconRenderer } from "../IconRenderer";
+import { Avatar } from "../avatar-api";
 
 interface ReviewItemProps {
   image: string;
@@ -25,13 +26,14 @@ export const ReviewItem = ({ image, name, role, text, rating }: ReviewItemProps)
         size={35}
       />
 
-      <Image
+      {/* <Image
         src={image}
         alt={name}
         width={80}
         height={80}
-        className="mx-auto mb-2 rounded-full object-cover"
-      />
+        
+      /> */}
+      <Avatar seed={name} variant="bottts" size={80} />
       <div className="flex justify-center gap-1 mb-2 text-yellow-500">
         {Array.from({ length: rating }).map((_, i) => (
             <IconRenderer

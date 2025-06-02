@@ -46,9 +46,9 @@ export const ReviewSection = () => {
             : testimonials?.map((review, idx) => (
                 <SwiperSlide key={idx}>
                   <ReviewItem
-                    image={review.image}
+                    image={review.image ?? ""}
                     name={review.name}
-                    role={review.role}
+                    role={review.role ?? ""}
                     text={review.message}
                     rating={review.rating}
                   />

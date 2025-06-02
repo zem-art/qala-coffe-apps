@@ -106,8 +106,8 @@ model Bokking {
 model Review {
     id              String   @id @default(uuid())
     name            String
-    role            String
-    image           String
+    role            String?
+    image           String?
     message         String
     rating          Int      // between 1-5
     createdAt       DateTime @default(now())

@@ -179,48 +179,48 @@ async function main() {
     data: [
       {
         name: "John Deo",
-        role: "klien puas",
-        image: "/image/pic-1.jpg",
+        role: "Desainer Grafis",
+        image: "/image/pic-1.png",
         message:
           "Saya benar-benar terkesan dengan kualitas layanan yang diberikan. Semuanya ditangani secara profesional dan tepat waktu!",
         rating: 5,
       },
       {
         name: "John Deo",
-        role: "klien puas",
-        image: "/image/pic-2.jpg",
+        role: "Freelancer",
+        image: "/image/pic-2.png",
         message:
           "Timnya sangat membantu dari awal sampai akhir. Saya sangat merekomendasikan layanan mereka!",
-        rating: 5,
+        rating: 2,
       },
       {
         image: "/image/pic-1.png",
-        name: "John Deo",
-        role: "klien puas",
+        name: "Aisyah Rahma",
+        role: "Manajer Proyek",
         message:
           "Perhatian terhadap detailnya luar biasa, dan komunikasinya sangat baik. Saya sangat puas dengan hasilnya.",
-        rating: 5,
+        rating: 1,
       },
       {
         image: "/image/pic-2.png",
-        name: "John",
-        role: "klien puas",
+        name: "Budi Santoso",
+        role: "Pemilik UMKM",
         message:
           "Mereka benar-benar memberikan lebih dari yang saya harapkan. Sangat menyenangkan bekerja dengan mereka.",
-        rating: 5,
+        rating: 4,
       },
       {
         image: "/image/pic-3.png",
-        name: "Deo",
-        role: "klien puas",
+        name: "Deo Fernando",
+        role: "Pengembang Web",
         message:
           "Tim yang sangat profesional dan efisien. Hasilnya jauh melebihi ekspektasi saya!",
-        rating: 5,
+        rating: 3,
       },
       {
         image: "/image/pic-4.png",
-        name: "Ameli",
-        role: "klien puas",
+        name: "Ameli Nur",
+        role: "UI/UX Designer",
         message:
           "Luar biasa! Responnya cepat dan mereka benar-benar mengerti apa yang saya butuhkan.",
         rating: 5,
@@ -228,7 +228,7 @@ async function main() {
       {
         image: "/image/pic-1.png",
         name: "Sophia Brown",
-        role: "pelanggan senang",
+        role: "Konsultan Pemasaran",
         message:
           "Bekerja sama dengan mereka sangat menyenangkan. Saya sangat puas dengan hasil akhirnya.",
         rating: 5,
@@ -236,15 +236,15 @@ async function main() {
       {
         image: "/image/pic-2.png",
         name: "David Lee",
-        role: "pemilik bisnis",
+        role: "Pemilik Startup",
         message:
           "Keahlian mereka terlihat jelas dari hasil akhirnya. Saya pasti akan menggunakan jasa mereka lagi!",
-        rating: 5,
+        rating: 2,
       },
       {
         image: "/image/pic-3.png",
         name: "Lina Zhao",
-        role: "klien puas",
+        role: "Content Creator",
         message:
           "Pelayanan yang sangat baik! Mereka mendengarkan dengan seksama dan hasilnya benar-benar sesuai harapan.",
         rating: 5,
@@ -252,10 +252,10 @@ async function main() {
       {
         image: "/image/pic-4.png",
         name: "Carlos Rivera",
-        role: "pelanggan setia",
+        role: "Digital Marketer",
         message:
           "Prosesnya mudah dan lancar dari awal sampai akhir. Bintang lima pantas diberikan!",
-        rating: 5,
+        rating: 3,
       },
     ]
   });
