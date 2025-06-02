@@ -1,5 +1,5 @@
 import React from "react";
-import TableSkeletonRow from "~/app/_components/skeleton";
+import TableSkeletonRow from "~/app/_components/skeleton/table-skeleton";
 
 interface RenderBodyOptions<T> {
   isLoading: boolean;

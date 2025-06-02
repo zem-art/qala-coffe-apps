@@ -1,7 +1,7 @@
 "use client";
 import { api } from "~/trpc/react";
 import React, { useState } from "react";
-import TableSkeletonRow from "~/app/_components/skeleton";
+import TableSkeletonRow from "~/app/_components/skeleton/table-skeleton";
 
 // NOTE: this is code list data with server-side pagination
 
