@@ -24,7 +24,7 @@ export default function DashboardPage() {
           <>
             <StatsCard title="Customers" value={String(data?.userCount)} change="+0%" positive />
             <StatsCard title="Product" value={String(data?.productCount)} change="+0%" positive />
-            <StatsCard title="Orders" value="5,359" change="-9%" />
+            <StatsCard title="Orders" value={String(data?.categoryCount)} change="0%" positive/>
           </>
         )}
       </div>

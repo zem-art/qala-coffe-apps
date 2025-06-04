@@ -7,10 +7,12 @@ export const reportRouter = createTRPCRouter({
             where : { role : "2"}
         });
         const productCount = await ctx.db.product.count();
+        const categoryCount = await ctx.db.category.count();
 
         return {
             userCount,
             productCount,
+            categoryCount,
         };
     }),
 })
