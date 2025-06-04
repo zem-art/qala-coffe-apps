@@ -104,7 +104,7 @@ export const MenuSection = () => {
                     image={categoryImages[String(item.categoryId) as keyof typeof categoryImages] || "/image/menu-1.png"}
                     title={item.name}
                     description={item.description ?? ""}
-                    price={formatCurrency(item.price).replace("IDR", 'Rp.')}
+                    price={item?.price ? formatCurrency(item?.price)?.replace("IDR", 'Rp.') : ""}
                   />
                 ))
               : [])}

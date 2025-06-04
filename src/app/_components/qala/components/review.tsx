@@ -43,17 +43,20 @@ export const ReviewSection = () => {
                   <ReviewSkeleton />
                 </SwiperSlide>
               ))
-            : testimonials?.map((review, idx) => (
-                <SwiperSlide key={idx}>
-                  <ReviewItem
-                    image={review.image ?? ""}
-                    name={review.name}
-                    role={review.role ?? ""}
-                    text={review.message}
-                    rating={review.rating}
-                  />
-                </SwiperSlide>
-              ))}
+            : (
+              testimonials ? 
+                testimonials?.map((review, idx) => (
+                  <SwiperSlide key={idx}>
+                    <ReviewItem
+                      image={review.image ?? ""}
+                      name={review.name}
+                      role={review.role ?? ""}
+                      text={review.message}
+                      rating={review.rating}
+                    />
+                  </SwiperSlide>
+                )): []
+            )}
         </Swiper>
       </div>
     </section>
