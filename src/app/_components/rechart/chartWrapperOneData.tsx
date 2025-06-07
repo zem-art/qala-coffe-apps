@@ -1,3 +1,4 @@
+// this is a wrapper component for recharts to simplify usage
 "use client";
 import {
     LineChart,
@@ -36,7 +37,7 @@ import {
   }: ChartWrapperProps) {
     return (
       <ResponsiveContainer width="100%" height={300}>
-          {type === "line" && (
+          {type === "line" ? (
             <LineChart data={data}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey={xKey} />
@@ -45,9 +46,7 @@ import {
               <Legend />
               <Line type="monotone" dataKey={dataKey} stroke={colors[1]} />
             </LineChart>
-          )}
-
-          {type === "bar" && (
+          ) : type === "bar" ? (
             <BarChart data={data}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey={xKey} />
@@ -56,9 +55,7 @@ import {
               <Legend />
               <Bar dataKey={dataKey} fill={colors[0]} />
             </BarChart>
-          )}
-
-          {type === "pie" && (
+          ) : (
             <PieChart>
               <Tooltip />
               <Legend />

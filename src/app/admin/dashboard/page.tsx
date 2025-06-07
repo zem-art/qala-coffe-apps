@@ -1,7 +1,8 @@
 'use client';
 import { useState } from "react";
 import StatsCard from "~/app/_components/admin/statscard";
-import ChartWrapper from "~/app/_components/rechart/chartWrapper";
+import ChartWrapper from "~/app/_components/rechart/chartWrapperOneData";
+import ChartWrapperMulti from "~/app/_components/rechart/chartWrapperTwoData ";
 import { api } from "~/trpc/react";
 
 export default function DashboardPage() {
@@ -16,18 +17,18 @@ export default function DashboardPage() {
   const exampleChart = ["line_chart", "pie_chart", "bar_chart"];
 
   const exampleLineChartData = [
-    { date: "2025-01-01", totalReviews: 5 },
-    { date: "2025-02-02", totalReviews: 8 },
-    { date: "2025-03-02", totalReviews: 2 },
-    { date: "2025-04-02", totalReviews: 4 },
-    { date: "2025-05-02", totalReviews: 4 },
-    { date: "2025-06-02", totalReviews: 6 },
-    { date: "2025-07-02", totalReviews: 2 },
-    { date: "2025-08-02", totalReviews: 7 },
-    { date: "2025-09-02", totalReviews: 5 },
-    { date: "2025-10-02", totalReviews: 3 },
-    { date: "2025-11-02", totalReviews: 1 },
-    { date: "2025-12-02", totalReviews: 6 },
+    { date: "2025-01-01", totalReviews: 5, totalUsers: 20 },
+    { date: "2025-02-02", totalReviews: 8, totalUsers: 4  },
+    { date: "2025-03-02", totalReviews: 2, totalUsers: 3  },
+    { date: "2025-04-02", totalReviews: 4, totalUsers: 50 },
+    { date: "2025-05-02", totalReviews: 4, totalUsers: 34 },
+    { date: "2025-06-02", totalReviews: 6, totalUsers: 12 },
+    { date: "2025-07-02", totalReviews: 2, totalUsers: 65 },
+    { date: "2025-08-02", totalReviews: 7, totalUsers: 32 },
+    { date: "2025-09-02", totalReviews: 5, totalUsers: 65 },
+    { date: "2025-10-02", totalReviews: 3, totalUsers: 2  },
+    { date: "2025-11-02", totalReviews: 1, totalUsers: 30 },
+    { date: "2025-12-02", totalReviews: 6, totalUsers: 23 },
   ]
 
   const examplePieChartData = [
@@ -39,19 +40,19 @@ export default function DashboardPage() {
   ]
 
   const exampleBarChartData = [
-    { month: "Jan", visitors: 120 },
-    { month: "Feb", visitors: 90 },
-    { month: "Mar", visitors: 150 },
-    { month: "Apr", visitors: 100 },
-    { month: "May", visitors: 170 },
-    { month: "Jun", visitors: 130 },
-    { month: "Jul", visitors: 180 },
-    { month: "Aug", visitors: 160 },
-    { month: "Sep", visitors: 140 },
-    { month: "Oct", visitors: 200 },
-    { month: "Nov", visitors: 175 },
-    { month: "Dec", visitors: 190 },
-  ];
+    { month: "Jan", visitors: 120, sales: 80 },
+    { month: "Feb", visitors: 90, sales: 70 },
+    { month: "Mar", visitors: 150, sales: 100 },
+    { month: "Apr", visitors: 100, sales: 90 },
+    { month: "May", visitors: 170, sales: 120 },
+    { month: "Jun", visitors: 130, sales: 110 },
+    { month: "Jul", visitors: 180, sales: 140 },
+    { month: "Aug", visitors: 160, sales: 130 },
+    { month: "Sep", visitors: 140, sales: 125 },
+    { month: "Oct", visitors: 200, sales: 150 },
+    { month: "Nov", visitors: 175, sales: 135 },
+    { month: "Dec", visitors: 190, sales: 145 },
+  ];  
 
 
   const isSkeleton = isLoading || !data;
@@ -164,7 +165,7 @@ export default function DashboardPage() {
       <div className="mt-6 grid gap-6">
         {/* Example Chart */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow">
-          <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-white capitalize">example chart</h3>
+          <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-white capitalize">example chart simplify usage</h3>
           <div className="flex space-x-2 mb-4">
             {exampleChart.map((tab) => (
               <button
@@ -204,6 +205,63 @@ export default function DashboardPage() {
                   type="bar"
                   data={exampleBarChartData}
                   dataKey="visitors"
+                  xKey="rating"
+                /> 
+                }
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="mt-6 grid gap-6">
+        {/* Example Chart */}
+        <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow">
+          <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-white capitalize">example multi chart</h3>
+          <div className="flex space-x-2 mb-4">
+            {exampleChart.map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setSelectedTabChart(tab)}
+                disabled={isSkeleton}
+                className={`px-4 py-2 rounded-full text-sm transition cursor-pointer ${
+                  selectedTabChart === tab
+                    ? "bg-indigo-600 text-white"
+                    : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+                }`}
+              >
+                {tab?.replace("_", " ")}
+              </button>
+            ))}
+          </div>
+          {isSkeleton ? (
+            <div className="h-48 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
+          ) : (
+            <div className="h-auto bg-indigo-100 dark:bg-indigo-300/20 rounded flex items-center justify-center text-sm text-indigo-800 dark:text-indigo-200">
+              {selectedTabChart == "line_chart" ? 
+                <ChartWrapperMulti
+                  type="line"
+                  data={exampleLineChartData}
+                  dataKeys={[
+                    { key: "totalReviews", name: "Review" },
+                    { key: "totalUsers", name: "User" },
+                  ]}
+                  xKey="date"
+                />
+              : selectedTabChart == "pie_chart" ? 
+                <ChartWrapperMulti
+                    type="pie"
+                    data={examplePieChartData}
+                    dataKeys={[{ key: "value" }]}
+                    nameKey="label"
+                  />     
+                : 
+                <ChartWrapperMulti
+                  type="bar"
+                  data={exampleBarChartData}
+                  dataKeys={[
+                    { key: "visitors", name: "Pengunjung" },
+                    { key: "sales", name: "Penjualan" },
+                  ]}
                   xKey="rating"
                 /> 
                 }
