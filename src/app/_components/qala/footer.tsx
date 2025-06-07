@@ -13,6 +13,13 @@ export const Footer = () => {
     { name: "book", link: "#book" },
   ];
 
+  const SocialLink = [
+    { icon: "FaFacebook", label: "facebook" },
+    { icon: "FaTwitter", label: "twitter" },
+    { icon: "FaInstagram", label: "instagram" },
+    { icon: "FaLinkedin", label: "linkedin" },
+  ];
+
   return (
     <section className="bg-white px-6 py-16 text-main">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
@@ -66,16 +73,7 @@ export const Footer = () => {
               className="inline-block mr-2 text-main"
               size={16}
             />
-            +123-456-7890
-          </a>
-          <a href="#" className="block text-base py-1">
-            <IconRenderer
-              lib="fa"
-              name="FaPhone"
-              className="inline-block mr-2 text-main"
-              size={16}
-            />
-            +111-222-3333
+            +62 812-3456-7890
           </a>
           <a href="#" className="block text-base py-1">
             <IconRenderer
@@ -84,7 +82,7 @@ export const Footer = () => {
               className="inline-block mr-2 text-main"
               size={16}
             />
-            coffee@gmail.com
+            cs@qalacoffee.com
           </a>
           <a href="#" className="block text-base py-1">
             <IconRenderer
@@ -100,12 +98,7 @@ export const Footer = () => {
         {/* Social Links */}
         <div>
           <h3 className="text-2xl font-semibold mb-4">Follow Us</h3>
-          {[
-            { icon: "FaFacebook", label: "facebook" },
-            { icon: "FaTwitter", label: "twitter" },
-            { icon: "FaInstagram", label: "instagram" },
-            { icon: "FaLinkedin", label: "linkedin" },
-          ].map((social, idx) => (
+          {SocialLink.map((social, idx) => (
             <a
               key={idx}
               href="#"

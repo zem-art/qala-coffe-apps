@@ -3,9 +3,10 @@ import * as FaIcons from "react-icons/fa";
 import * as MdIcons from "react-icons/md";
 import * as AiIcons from "react-icons/ai";
 import * as BsIcons from "react-icons/bs";
+import * as RiIcons from "react-icons/ri";
 import type { IconType } from "react-icons";
 
-type IconLibrary = "fa" | "md" | "ai" | "bs";
+export type IconLibrary = "fa" | "md" | "ai" | "bs" | "ri";
 
 interface GetIconProps {
   lib: IconLibrary;
@@ -18,6 +19,7 @@ export function getIcon({ lib, name }: GetIconProps): IconType | null {
     md: MdIcons,
     ai: AiIcons,
     bs: BsIcons,
+    ri: RiIcons,
   };
 
   const icons = libraries[lib];

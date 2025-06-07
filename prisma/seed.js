@@ -184,6 +184,7 @@ async function main() {
         message:
           "Saya benar-benar terkesan dengan kualitas layanan yang diberikan. Semuanya ditangani secara profesional dan tepat waktu!",
         rating: 5,
+        createdAt: "2025-05-01T10:15:00Z"
       },
       {
         name: "John Deo",
@@ -192,6 +193,7 @@ async function main() {
         message:
           "Timnya sangat membantu dari awal sampai akhir. Saya sangat merekomendasikan layanan mereka!",
         rating: 2,
+        createdAt: "2025-05-03T08:40:00Z"
       },
       {
         image: "/image/pic-1.png",
@@ -200,6 +202,7 @@ async function main() {
         message:
           "Perhatian terhadap detailnya luar biasa, dan komunikasinya sangat baik. Saya sangat puas dengan hasilnya.",
         rating: 1,
+        createdAt: "2025-05-04T12:20:00Z"
       },
       {
         image: "/image/pic-2.png",
@@ -208,6 +211,7 @@ async function main() {
         message:
           "Mereka benar-benar memberikan lebih dari yang saya harapkan. Sangat menyenangkan bekerja dengan mereka.",
         rating: 4,
+        createdAt: "2025-05-06T15:00:00Z"
       },
       {
         image: "/image/pic-3.png",
@@ -216,6 +220,7 @@ async function main() {
         message:
           "Tim yang sangat profesional dan efisien. Hasilnya jauh melebihi ekspektasi saya!",
         rating: 3,
+        createdAt: "2025-05-07T09:30:00Z"
       },
       {
         image: "/image/pic-4.png",
@@ -224,6 +229,7 @@ async function main() {
         message:
           "Luar biasa! Responnya cepat dan mereka benar-benar mengerti apa yang saya butuhkan.",
         rating: 5,
+        createdAt: "2025-05-10T11:45:00Z"
       },
       {
         image: "/image/pic-1.png",
@@ -232,6 +238,7 @@ async function main() {
         message:
           "Bekerja sama dengan mereka sangat menyenangkan. Saya sangat puas dengan hasil akhirnya.",
         rating: 5,
+        createdAt: "2025-05-11T13:10:00Z"
       },
       {
         image: "/image/pic-2.png",
@@ -240,6 +247,7 @@ async function main() {
         message:
           "Keahlian mereka terlihat jelas dari hasil akhirnya. Saya pasti akan menggunakan jasa mereka lagi!",
         rating: 2,
+        createdAt: "2025-05-13T16:30:00Z"
       },
       {
         image: "/image/pic-3.png",
@@ -248,6 +256,7 @@ async function main() {
         message:
           "Pelayanan yang sangat baik! Mereka mendengarkan dengan seksama dan hasilnya benar-benar sesuai harapan.",
         rating: 5,
+        createdAt: "2025-05-15T10:50:00Z"
       },
       {
         image: "/image/pic-4.png",
@@ -256,9 +265,80 @@ async function main() {
         message:
           "Prosesnya mudah dan lancar dari awal sampai akhir. Bintang lima pantas diberikan!",
         rating: 3,
+        createdAt: "2025-05-17T14:25:00Z"
       },
+      {
+        image: "/image/pic-5.png",
+        name: "Nina Kartika",
+        role: "HR Specialist",
+        message:
+          "Timnya sangat komunikatif dan profesional. Saya merasa dilibatkan dalam setiap proses.",
+        rating: 4,
+        createdAt: "2025-05-18T09:00:00Z"
+      },
+      {
+        image: "/image/pic-6.png",
+        name: "Yusuf Hadi",
+        role: "Akuntan",
+        message:
+          "Pelayanannya cepat dan akurat. Tidak ada kendala sama sekali selama proses.",
+        rating: 5,
+        createdAt: "2025-05-20T11:20:00Z"
+      },
+      {
+        image: "/image/pic-7.png",
+        name: "Siti Nurhaliza",
+        role: "Content Strategist",
+        message:
+          "Mereka memahami kebutuhan saya dan mengimplementasikannya dengan sempurna.",
+        rating: 5,
+        createdAt: "2025-05-21T14:45:00Z"
+      },
+      {
+        image: "/image/pic-8.png",
+        name: "Andi Wijaya",
+        role: "Teknisi",
+        message:
+          "Hasil kerjanya sesuai ekspektasi. Respon juga sangat cepat dan ramah.",
+        rating: 4,
+        createdAt: "2025-05-23T16:00:00Z"
+      }
     ]
+    
   });
+
+  await prisma.bokking.createMany({
+    data : [
+      {
+        name : "Ucups", 
+        email : "ucup@maill.com",
+        phone : "0873245346343",
+        number : 1,
+        message : "saya mau pesan 1 meja untuk 2 orang",
+      },
+      {
+        name : "kasep", 
+        email : "kasep@maill.com",
+        phone : "082346345217",
+        number : 2,
+        message : "saya mau pesan 1 meja untuk 2 orang",
+      },
+      {
+        name : "rine", 
+        email : "rine@maill.com",
+        phone : "08346523423332",
+        number : 3,
+        message : "saya mau pesan 1 meja untuk 2 orang",
+      },
+      {
+        name : "juki", 
+        email : "juki@maill.com",
+        phone : "082347654578",
+        number : 4,
+        message : "saya mau pesan 1 meja untuk 2 orang",
+      }
+    ]
+  })
 
   console.log('semua table berhasil di buat ! ⬅️')
 }

@@ -10,6 +10,7 @@ export const BookingForm = () => {
     name: "",
     email: "",
     number: "",
+    phone : "",
     message: "",
   });
 
@@ -31,6 +32,7 @@ export const BookingForm = () => {
             await createBokking.mutateAsync({
                 name: form.name,
                 email: form.email,
+                phone : form.phone,
                 number: parseInt(form.number),
                 message: form.message,
             });
@@ -72,8 +74,15 @@ export const BookingForm = () => {
         <input
           onChange={handleChange}
           type="number"
+          name="phone"
+          placeholder="Phone Number"
+          className="w-full p-3 text-base rounded-md bg-transparent border border-main text-main placeholder-main mb-4 focus:outline-none focus:border-main/60"
+        />
+        <input
+          onChange={handleChange}
+          type="number"
           name="number"
-          placeholder="Number"
+          placeholder="Qty (Number of People)"
           className="w-full p-3 text-base rounded-md bg-transparent border border-main text-main placeholder-main mb-4 focus:outline-none focus:border-main/60"
         />
         <textarea

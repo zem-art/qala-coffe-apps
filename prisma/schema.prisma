@@ -99,6 +99,7 @@ model Bokking {
     id              String      @id @default(cuid())
     name            String
     email           String
+    phone           String?
     number          Int
     message         String
     createdAt       DateTime    @default(now())

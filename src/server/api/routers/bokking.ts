@@ -8,10 +8,18 @@ export const bokkingRouter = createTRPCRouter({
             z.object({ 
                 name : z.string(),
                 email : z.string(),
+                phone : z.string(),
                 message : z.string(),
                 number: z.number(),
             }))
         .mutation(async ({ input, ctx }) => {
             return await ctx.db.bokking.create({ data: input})
+        }),
+
+    getAll : publicProcedure
+        .query(async ({ ctx }) => {
+            return await ctx.db.bokking.findMany({
+                orderBy : { createdAt : "desc" }
+            })
         })
 })
