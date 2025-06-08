@@ -8,7 +8,7 @@ import { api } from "~/trpc/react";
 import { ReviewSkeleton } from "../../skeleton/review-skeleton";
 
 export const ReviewSection = () => {
-  const { data: testimonials, isLoading } = api.review.getAll.useQuery();
+  const { data: testimonials, isLoading } = api.review.getAllDashboard.useQuery();
 
   return (
     <section id="review" className="py-16 px-4 bg-gray-50">

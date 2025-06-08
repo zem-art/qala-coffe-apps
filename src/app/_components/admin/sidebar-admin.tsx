@@ -7,6 +7,7 @@ const items: { name: string; icon: string; lib: IconLibrary; url?: string }[] = 
   { name: "User", icon: "FaUser", lib: "fa", url: "/admin/users" },
   { name: "Product", icon: "FaCoffee", lib: "fa", url: "/admin/products" },
   { name: "Bokking", icon: "RiCalendarScheduleLine", lib: "ri", url: "/admin/bokking" },
+  { name: "Review", icon: "BsBarChartLineFill", lib: "bs", url: "/admin/review" },
 ];
 
 export default function SidebarDashboard({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
