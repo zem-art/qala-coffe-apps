@@ -58,18 +58,19 @@ export default function DateRangePicker({
             endDate: format(resetVal.endDate, "yyyy-MM-dd"),
         });
         setIsSelect("selection")
+        setShowPicker(false); // hide after apply
     };
 
     return (
-        <div className={`p-4 ` + (showPicker ? "bg-background dark:bg-gray-900 rounded shadow-md w-full max-w-md" : "")}>
+        <div className={`p-4 ` + (showPicker ? "bg-background dark:bg-gray-700 rounded shadow-md w-full max-w-md" : "")}>
         {isDisabled ? (
             <div className="text-gray-500">Date Range Picker is disabled</div>
         ) : (
             <>
             {!showPicker && (
                 <button
-                className="px-4 py-2 bg-gray-200 dark:bg-indigo-600 rounded hover:bg-gray-300 dark:text-background text-sm cursor-pointer"
-                onClick={() => setShowPicker(true)}
+                    className="px-4 py-2 bg-background dark:bg-indigo-600 rounded hover:bg-gray-300 dark:text-background text-sm cursor-pointer"
+                    onClick={() => setShowPicker(true)}
                 >
                     <IconRenderer
                         lib="bs"

@@ -1,43 +1,84 @@
 'use client';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "~/trpc/react";
 import StatsCard from "~/app/_components/admin/statscard";
 import ChartWrapper from "~/app/_components/rechart/chartWrapperOneData";
 import ChartWrapperMulti from "~/app/_components/rechart/chartWrapperTwoData ";
 import { exampleBarChartData, exampleLineChartData, examplePieChartData } from "~/utils/sample/data";
 import DateRangePicker, { type DateRangeValue } from "~/app/_components/date/DateRangePicker";
+import { format, parseISO, startOfMonth } from "date-fns";
 
 export default function DashboardPage() {
   const { data: dataCount, isLoading } = api.dashboard.getCounts.useQuery();
-  const { data: dataReview, isLoading: isLoadingReview } = api.dashboard.getStatisticsReview.useQuery({
-    startDate: "2025-05-01",
-    endDate: "2025-05-31",
-  });
   const [selectedTab, setSelectedTab] = useState<string>("Monthly");
   const [selectedTabChart, setSelectedTabChart] = useState<string>("line_chart");
   const tabs = ["Monthly"];
   // const tabs = ["Monthly", "Quarterly", "Annually"];
   const exampleChart = ["line_chart", "pie_chart", "bar_chart"];
-  const pieChartResult = Object.entries(dataReview?.ratingsCount || {})?.map(([key, value]) => ({ label : `⭐ ${key}` , value}))
-  const isSkeletonCount = isLoading || !dataCount;
-  const isSkeletonReview = isLoadingReview || !dataReview;
-
   const [dateRange, setDateRange] = useState<DateRangeValue>({
     startDate: "",
     endDate: "",
   });
+  const { data: dataReview, refetch, isLoading: isLoadingReview, isFetching } = api.dashboard.getStatisticsReview.useQuery({
+      startDate: dateRange.startDate || "2025-01-01",
+      endDate: dateRange.endDate || "2025-01-31",
+    },
+    /**
+     * hanya fetch ketika Apply ditekan.
+     * Nilai awal dari isLoadingReview dan isFetching adalah false karena kamu mengatur enabled: false di dalam useQuery
+     * Karena enabled: false, query tidak dijalankan secara otomatis saat komponen dimount.
+     * Maka React Query tidak memulai proses fetch → artinya isLoadingReview dan isFetching tetap false.
+     * Status baru berubah setelah kamu memanggil refetch().
+     */
+    // {
+    //   enabled: false,
+    // }
+  );
+  
+  const pieChartResult = Object.entries(dataReview?.ratingsCount || {})?.map(([key, value]) => ({ label : `⭐ ${key}` , value}))
+  const lineChartResult = Object.entries(dataReview?.dailyReviews || {})?.map(([key, value]) => ({ date: `${key}`, totalReviews: value }))
+  const isSkeletonCount = isLoading || !dataCount;
+  const isSkeletonReview = isLoadingReview || isFetching;
+  const isValid = dateRange.startDate !== "" && dateRange.endDate !== "";
+  
+  const handleApplyDateRange = (range: DateRangeValue) => {
+    if (range.startDate === range.endDate) {
+      const date = parseISO(range.startDate);
+      setDateRange({
+        ...range,
+        startDate : format(startOfMonth(date), 'yyyy-MM-dd')
+      });
 
-  const handleDateChange = ({ startDate, endDate }: { startDate: string; endDate: string }) => {
-    // console.log("Selected:", startDate, endDate);
-    // Kirim ke API atau setState
-    setDateRange({ startDate, endDate})
+      // Jika perlu refetch juga:
+      setTimeout(() => {
+        refetch().catch(console.error);
+      }, 0);
+      return;
+    }
+
+    setDateRange(range);
+    // tunggu state update, lalu refetch
+    setTimeout(() => {
+      refetch().catch(console.error);
+    }, 0);
   };
 
-  console.log('dateRange ==>', dateRange)
+  useEffect(() => {
+    if (isValid) {
+      refetch();
+    }
+  }, [dateRange]);
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold text-gray-800 dark:text-background">Welcome</h1>
+        <div className="absolute right-5 top-20 z-50">
+          <DateRangePicker onApply={handleApplyDateRange}/>
+        </div>
+      </div>
+
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {isSkeletonCount ? (
           Array.from({ length: 3 }).map((_, i) => (
             <div key={i} className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow animate-pulse">
@@ -64,7 +105,7 @@ export default function DashboardPage() {
             <div className="h-auto p-3 bg-blue-100 dark:bg-blue-300/20 rounded flex items-center justify-center text-sm text-blue-800 dark:text-blue-200">
               <ChartWrapper
                 type="line"
-                data={exampleLineChartData}
+                data={lineChartResult}
                 dataKey="totalReviews"
                 xKey="date"
               />
@@ -90,9 +131,6 @@ export default function DashboardPage() {
                 {tab}
               </button>
             ))}
-            <div className="absolute right-10 top-65 z-50">
-              <DateRangePicker onApply={handleDateChange}/>
-            </div>
           </div>
           {isSkeletonReview ? (
             <div className="h-48 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
