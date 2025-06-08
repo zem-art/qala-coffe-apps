@@ -1,66 +1,44 @@
 'use client';
 import { useState } from "react";
+import { api } from "~/trpc/react";
 import StatsCard from "~/app/_components/admin/statscard";
 import ChartWrapper from "~/app/_components/rechart/chartWrapperOneData";
 import ChartWrapperMulti from "~/app/_components/rechart/chartWrapperTwoData ";
-import { api } from "~/trpc/react";
+import { exampleBarChartData, exampleLineChartData, examplePieChartData } from "~/utils/sample/data";
+import DateRangePicker, { type DateRangeValue } from "~/app/_components/date/DateRangePicker";
 
 export default function DashboardPage() {
-  const { data, isLoading } = api.dashboard.getCounts.useQuery();
+  const { data: dataCount, isLoading } = api.dashboard.getCounts.useQuery();
   const { data: dataReview, isLoading: isLoadingReview } = api.dashboard.getStatisticsReview.useQuery({
     startDate: "2025-05-01",
     endDate: "2025-05-31",
   });
-  const [selectedTab, setSelectedTab] = useState("Monthly");
-  const [selectedTabChart, setSelectedTabChart] = useState("line_chart");
-  const tabs = ["Monthly", "Quarterly", "Annually"];
+  const [selectedTab, setSelectedTab] = useState<string>("Monthly");
+  const [selectedTabChart, setSelectedTabChart] = useState<string>("line_chart");
+  const tabs = ["Monthly"];
+  // const tabs = ["Monthly", "Quarterly", "Annually"];
   const exampleChart = ["line_chart", "pie_chart", "bar_chart"];
+  const pieChartResult = Object.entries(dataReview?.ratingsCount || {})?.map(([key, value]) => ({ label : `⭐ ${key}` , value}))
+  const isSkeletonCount = isLoading || !dataCount;
+  const isSkeletonReview = isLoadingReview || !dataReview;
 
-  const exampleLineChartData = [
-    { date: "2025-01-01", totalReviews: 5, totalUsers: 20 },
-    { date: "2025-02-02", totalReviews: 8, totalUsers: 4  },
-    { date: "2025-03-02", totalReviews: 2, totalUsers: 3  },
-    { date: "2025-04-02", totalReviews: 4, totalUsers: 50 },
-    { date: "2025-05-02", totalReviews: 4, totalUsers: 34 },
-    { date: "2025-06-02", totalReviews: 6, totalUsers: 12 },
-    { date: "2025-07-02", totalReviews: 2, totalUsers: 65 },
-    { date: "2025-08-02", totalReviews: 7, totalUsers: 32 },
-    { date: "2025-09-02", totalReviews: 5, totalUsers: 65 },
-    { date: "2025-10-02", totalReviews: 3, totalUsers: 2  },
-    { date: "2025-11-02", totalReviews: 1, totalUsers: 30 },
-    { date: "2025-12-02", totalReviews: 6, totalUsers: 23 },
-  ]
+  const [dateRange, setDateRange] = useState<DateRangeValue>({
+    startDate: "",
+    endDate: "",
+  });
 
-  const examplePieChartData = [
-    { label: "⭐ 1", value: 2 },
-    { label: "⭐ 2", value: 4 },
-    { label: "⭐ 3", value: 6 },
-    { label: "⭐ 4", value: 3 },
-    { label: "⭐ 5", value: 7 },
-  ]
+  const handleDateChange = ({ startDate, endDate }: { startDate: string; endDate: string }) => {
+    // console.log("Selected:", startDate, endDate);
+    // Kirim ke API atau setState
+    setDateRange({ startDate, endDate})
+  };
 
-  const exampleBarChartData = [
-    { month: "Jan", visitors: 120, sales: 80 },
-    { month: "Feb", visitors: 90, sales: 70 },
-    { month: "Mar", visitors: 150, sales: 100 },
-    { month: "Apr", visitors: 100, sales: 90 },
-    { month: "May", visitors: 170, sales: 120 },
-    { month: "Jun", visitors: 130, sales: 110 },
-    { month: "Jul", visitors: 180, sales: 140 },
-    { month: "Aug", visitors: 160, sales: 130 },
-    { month: "Sep", visitors: 140, sales: 125 },
-    { month: "Oct", visitors: 200, sales: 150 },
-    { month: "Nov", visitors: 175, sales: 135 },
-    { month: "Dec", visitors: 190, sales: 145 },
-  ];  
-
-
-  const isSkeleton = isLoading || !data;
+  console.log('dateRange ==>', dateRange)
 
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {isSkeleton ? (
+        {isSkeletonCount ? (
           Array.from({ length: 3 }).map((_, i) => (
             <div key={i} className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow animate-pulse">
               <div className="h-4 w-1/3 bg-gray-300 dark:bg-gray-700 mb-4 rounded"></div>
@@ -69,9 +47,9 @@ export default function DashboardPage() {
           ))
         ) : (
           <>
-            <StatsCard title="Customers" value={String(data?.userCount)} change="+0%" positive />
-            <StatsCard title="Product" value={String(data?.productCount)} change="+0%" positive />
-            <StatsCard title="category" value={String(data?.categoryCount)} change="0%" positive/>
+            <StatsCard title="Customers" value={String(dataCount?.userCount)} change="+0%" positive />
+            <StatsCard title="Product" value={String(dataCount?.productCount)} change="+0%" positive />
+            <StatsCard title="category" value={String(dataCount?.categoryCount)} change="0%" positive/>
           </>
         )}
       </div>
@@ -80,7 +58,7 @@ export default function DashboardPage() {
         {/* Monthly Review Card */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow">
           <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-white">Monthly Sales</h3>
-          {isSkeleton ? (
+          {isSkeletonReview ? (
             <div className="h-auto bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
           ) : (
             <div className="h-auto p-3 bg-blue-100 dark:bg-blue-300/20 rounded flex items-center justify-center text-sm text-blue-800 dark:text-blue-200">
@@ -96,13 +74,13 @@ export default function DashboardPage() {
 
         {/* Statistics Card */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow">
-          <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-white">Statistics</h3>
-          <div className="flex space-x-2 mb-4">
+          <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-white">Statistics Review</h3>
+          <div className="flex space-x-2 mb-4 justify-between">
             {tabs.map((tab) => (
               <button
                 key={tab}
                 onClick={() => setSelectedTab(tab)}
-                disabled={isSkeleton}
+                disabled={isSkeletonReview}
                 className={`px-4 py-2 rounded-full text-sm transition cursor-pointer ${
                   selectedTab === tab
                     ? "bg-indigo-600 text-white"
@@ -112,21 +90,18 @@ export default function DashboardPage() {
                 {tab}
               </button>
             ))}
+            <div className="absolute right-10 top-65 z-50">
+              <DateRangePicker onApply={handleDateChange}/>
+            </div>
           </div>
-          {isSkeleton ? (
+          {isSkeletonReview ? (
             <div className="h-48 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
           ) : (
             <div className="h-auto bg-indigo-100 dark:bg-indigo-300/20 rounded flex items-center justify-center text-sm text-indigo-800 dark:text-indigo-200">
               {selectedTab == "Monthly" ? 
                 <ChartWrapper
                   type="pie"
-                  data={[
-                    { label: "⭐ 1", value: 2 },
-                    { label: "⭐ 2", value: 4 },
-                    { label: "⭐ 3", value: 6 },
-                    { label: "⭐ 4", value: 3 },
-                    { label: "⭐ 5", value: 7 },
-                  ]}
+                  data={pieChartResult || []}
                   dataKey="value"
                   nameKey="label"
                 />            
@@ -171,7 +146,7 @@ export default function DashboardPage() {
               <button
                 key={tab}
                 onClick={() => setSelectedTabChart(tab)}
-                disabled={isSkeleton}
+                disabled={isSkeletonReview}
                 className={`px-4 py-2 rounded-full text-sm transition cursor-pointer ${
                   selectedTabChart === tab
                     ? "bg-indigo-600 text-white"
@@ -182,7 +157,7 @@ export default function DashboardPage() {
               </button>
             ))}
           </div>
-          {isSkeleton ? (
+          {isSkeletonReview ? (
             <div className="h-48 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
           ) : (
             <div className="h-auto bg-indigo-100 dark:bg-indigo-300/20 rounded flex items-center justify-center text-sm text-indigo-800 dark:text-indigo-200">
@@ -222,7 +197,7 @@ export default function DashboardPage() {
               <button
                 key={tab}
                 onClick={() => setSelectedTabChart(tab)}
-                disabled={isSkeleton}
+                disabled={isSkeletonReview}
                 className={`px-4 py-2 rounded-full text-sm transition cursor-pointer ${
                   selectedTabChart === tab
                     ? "bg-indigo-600 text-white"
@@ -233,7 +208,7 @@ export default function DashboardPage() {
               </button>
             ))}
           </div>
-          {isSkeleton ? (
+          {isSkeletonReview ? (
             <div className="h-48 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
           ) : (
             <div className="h-auto bg-indigo-100 dark:bg-indigo-300/20 rounded flex items-center justify-center text-sm text-indigo-800 dark:text-indigo-200">

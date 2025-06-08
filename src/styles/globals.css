@@ -13,3 +13,32 @@
   --border: .2rem solid var(--main-color);
   --border-hover: .2rem dashed var(--main-color);
 }
+
+/* Default (light mode) */
+.rdrCalendarWrapper {
+  background-color: #f9fafb; /* slate-50 */
+  color: #1f2937; /* gray-800 */
+  border-radius: 0.5rem;
+}
+
+.rdrDayToday .rdrDayNumber span {
+  color: #3b82f6 !important; /* blue-500 */
+}
+
+/* Dark mode */
+.dark .rdrCalendarWrapper {
+  background-color: #1f2937; /* gray-800 */
+  color: #f9fafb; /* slate-50 */
+}
+
+.dark .rdrDayToday .rdrDayNumber span {
+  color: #60a5fa !important; /* blue-400 */
+}
+
+.dark .rdrDayNumber span {
+  color: #d1d5db; /* gray-300 */
+}
+
+.dark .rdrDayPassive {
+  opacity: 0.3;
+}
