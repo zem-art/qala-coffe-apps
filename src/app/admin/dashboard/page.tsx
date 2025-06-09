@@ -98,7 +98,7 @@ export default function DashboardPage() {
       <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Monthly Review Card */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow">
-          <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-white">Monthly Sales</h3>
+          <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-white">Monthly Reviews</h3>
           {isSkeletonReview ? (
             <div className="h-auto bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
           ) : (
