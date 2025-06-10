@@ -82,15 +82,34 @@ model Product {
   id          String     @id @default(cuid())
   name        String
   description String?
-  price       Int
+  price       String
   imageUrl    String?
   createdAt   DateTime  @default(now())
   category    Category? @relation(fields: [categoryId], references: [id])
-  categoryId  String?
+  categoryId  Int?
 }
 
 model Category {
-  id       String     @id @default(cuid())
+  id       Int    @id @default(autoincrement())
   name     String
   products Product[]
+}
+
+model Bokking {
+    id              String      @id @default(cuid())
+    name            String
+    email           String
+    phone           String?
+    number          Int
+    message         String
+    createdAt       DateTime    @default(now())
+}
+model Review {
+    id              String   @id @default(uuid())
+    name            String
+    role            String?
+    image           String?
+    message         String
+    rating          Int      // between 1-5
+    createdAt       DateTime @default(now())
 }

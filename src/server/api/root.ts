@@ -3,6 +3,9 @@ import { postRouter } from "~/server/api/routers/post";
 import { authRouter } from "~/server/api/routers/auth";
 import { productRouter } from "./routers/products";
 import { categoryRouter } from "./routers/categorys";
+import { reportRouter } from "./routers/report";
+import { bokkingRouter } from "./routers/bokking";
+import { reviewRouter } from "./routers/reviews";
 
 /**
  * This is the primary router for your server.
@@ -10,10 +13,13 @@ import { categoryRouter } from "./routers/categorys";
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
-  auth: authRouter, // ⬅️ pastikan ini ada
   post: postRouter,
+  auth: authRouter, // ⬅️ pastikan ini ada
   product: productRouter,
   category: categoryRouter,
+  dashboard : reportRouter,
+  bokking : bokkingRouter,
+  review: reviewRouter,
 });
 
 // export type definition of API

@@ -90,7 +90,9 @@ export default function LoginPage() {
         <div className="flex items-center justify-center min-h-screen px-4">
             <div className="bg-white p-6 rounded shadow w-full max-w-md space-y-6">
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    <h1 className="text-2xl font-bold text-center">Login</h1>
+                    <a href="/">
+                        <h1 className="text-2xl font-bold text-center mb-4">Login</h1>
+                    </a>
 
                     <input
                         type="email"

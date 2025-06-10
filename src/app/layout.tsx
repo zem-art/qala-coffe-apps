@@ -1,4 +1,6 @@
 import "~/styles/globals.css";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";

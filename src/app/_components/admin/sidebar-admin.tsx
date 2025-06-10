@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { IconRenderer } from "../IconRenderer";
+import type { IconLibrary } from "~/utils/icon";
 
-const items: { name: string; icon: string; lib: "fa" | "md" | "ai" | "bs"; url?: string }[] = [
+const items: { name: string; icon: string; lib: IconLibrary; url?: string }[] = [
   { name: "Dashboard", icon: "MdDashboard", lib: "md", url : "/admin/dashboard" },
   { name: "User", icon: "FaUser", lib: "fa", url: "/admin/users" },
   { name: "Product", icon: "FaCoffee", lib: "fa", url: "/admin/products" },
-  { name: "Reports", icon: "FaTasks", lib: "fa", url: "/admin/reports" },
+  { name: "Bokking", icon: "RiCalendarScheduleLine", lib: "ri", url: "/admin/bokking" },
+  { name: "Review", icon: "BsBarChartLineFill", lib: "bs", url: "/admin/review" },
 ];
 
 export default function SidebarDashboard({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {

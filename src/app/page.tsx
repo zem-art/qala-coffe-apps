@@ -3,11 +3,11 @@ import { LatestPost } from "~/app/_components/post";
 import { auth } from "~/server/auth";
 import { api, HydrateClient } from "~/trpc/server";
 import { Header } from "./_components/qala/header";
-import { HomeSection } from "./_components/qala/home";
-import { AboutSection } from "./_components/qala/about";
-import { MenuSection } from "./_components/qala/menu_components";
-import { ReviewSection } from "./_components/qala/review_section";
-import { BookingForm } from "./_components/qala/booking_form";
+import { HomeSection } from "./_components/qala/components/home";
+import { AboutSection } from "./_components/qala/components/about";
+import { MenuSection } from "./_components/qala/components/menu";
+import { ReviewSection } from "./_components/qala/components/review";
+import { BookingForm } from "./_components/qala/components/booking";
 import { Footer } from "./_components/qala/footer";
 
 export default async function Home() {

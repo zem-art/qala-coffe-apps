@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from "next-auth/react";
 import { IconRenderer } from "~/app/_components/IconRenderer";
-import TableSkeletonRow from "~/app/_components/skeleton";
+import TableSkeletonRow from "~/app/_components/skeleton/table-skeleton";
 
 export default function ListUsers() {
   const router = useRouter();

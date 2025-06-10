@@ -1,7 +1,7 @@
 import { getIcon } from "~/utils/icon";
 
 type IconRendererProps = {
-  lib: "fa" | "md" | "ai" | "bs";
+  lib: "fa" | "md" | "ai" | "bs" | "ri";
   name: string;
   size?: number;
   className?: string;

@@ -3,17 +3,23 @@ import { useState, useEffect } from "react";
 import { IconRenderer } from "../IconRenderer";
 import Navbar from "./navbar";
 import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 
 export const Header = () => {
+  const router = useRouter()
   const { data: session, status } = useSession();
   const [showHeader, setShowHeader] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-
   const handleLogout = async () => {
     if(window.confirm('Are you sure you want to log out ?.')){
       signOut({ callbackUrl: '/' })
     }
+  }
+
+  const handleDashboard = async () => {
+    console.log('jalann')
+    router.push('/admin/dashboard')
   }
 
   useEffect(() => {
@@ -40,7 +46,7 @@ export const Header = () => {
     >
       {/* Logo */}
       <a
-        href="#"
+        href="/"
         className="text-[2.3rem] text-main font-semibold flex items-center capitalize"
       >
         qala{" "}
@@ -59,19 +65,19 @@ export const Header = () => {
 
       {session?.user.name ? 
        <>
-          <a onClick={handleLogout} className="relative hidden md:inline-block px-6 py-2 text-main group items-center cursor-pointer">
-            <span className="absolute inset-0 border-2 border-main rounded transition-all duration-500 group-hover:border-dashed group-hover:scale-x-110">
-              <IconRenderer
-                lib="fa"
-                name="FaRegUserCircle"
-                size={20}
-                className="h-9 ml-2"
-              />
-            </span>
-            <span className="relative ml-4">
-              {session?.user?.name}
-            </span>
-          </a>
+        <a onClick={session?.user?.role == "1" ? handleDashboard : handleLogout} className="relative hidden md:inline-block px-6 py-2 text-main group items-center cursor-pointer">
+          <span className="absolute inset-0 border-2 border-main rounded transition-all duration-500 group-hover:border-dashed group-hover:scale-x-110">
+            <IconRenderer
+              lib="fa"
+              name="FaRegUserCircle"
+              size={20}
+              className="h-9 ml-2"
+            />
+          </span>
+          <span className="relative ml-4">
+            {session?.user?.role == "1" ? "console" : `${session?.user?.name}`}
+          </span>
+        </a>
         </>
        : 
         <>
