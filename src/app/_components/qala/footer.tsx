@@ -6,11 +6,11 @@ export const Footer = () => {
   ];
 
   const QuickLinks = [
-    { name: "home", link: "#home" },
-    { name: "about", link: "#about" },
-    { name: "menu", link: "#menu" },
-    { name: "review", link: "#review" },
-    { name: "book", link: "#book" },
+    { name: "home", link: "home" },
+    { name: "about", link: "about" },
+    { name: "menu", link: "menu" },
+    { name: "review", link: "review" },
+    { name: "book", link: "book" },
   ];
 
   const SocialLink = [

@@ -46,7 +46,7 @@ export const Header = () => {
     >
       {/* Logo */}
       <a
-        href="#"
+        href="/"
         className="text-[2.3rem] text-main font-semibold flex items-center capitalize"
       >
         qala{" "}

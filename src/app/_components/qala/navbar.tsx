@@ -1,15 +1,17 @@
 "use client"; // jika kamu pakai App Router (Next.js 13+)
-
 import { useState } from "react";
 import { IconRenderer } from "../IconRenderer";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isMenuPage = pathname === '/menu';
 
   const navLinks = [
     { href: "#home", label: "home" },
     { href: "#about", label: "about" },
-    { href: "#menu", label: "menu" },
+    { href: "menu/list", label: "menu" },
     { href: "#review", label: "review" },
     { href: "#book", label: "book" },
   ];
@@ -41,15 +43,18 @@ export default function Navbar() {
           ${isMenuOpen ? "scale-y-100" : "scale-y-0"} md:scale-y-100`
         }
       >
-        {navLinks.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            className="text-[1.4rem] text-main capitalize hover:text-accent transition duration-300 text-center md:text-left md:mr-8 md-mt-2"
-          >
-            {link.label}
-          </a>
-        ))}
+        {navLinks.map((link) => {
+          const href = isMenuPage ? link.href : `/${link.href}`;
+          return (
+            <a
+              key={link.href}
+              href={href}
+              className="text-[1.4rem] text-main capitalize hover:text-accent transition duration-300 text-center md:text-left md:mr-8 md-mt-2"
+            >
+              {link.label}
+            </a>
+          );
+        })}
       </nav>
     </>
   );
