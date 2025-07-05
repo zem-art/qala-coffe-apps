@@ -34,3 +34,9 @@ Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/ver
 | ----------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `maxAge`    | `86400` (1 hari) | Berapa lama session/JWT **berlaku penuh** sejak token terakhir dibuat atau di-refresh. Setelah ini, session akan expired otomatis.                                                               |
 | `updateAge` | `3600` (1 jam)   | Interval minimal **seberapa sering token akan diperbarui** saat user melakukan aktivitas di app (misal refresh halaman atau navigasi). Jika user aktif, token diperbarui agar `maxAge` di-reset. |
+
+## License
+
+This project is licensed under the MIT License with the [Commons Clause](https://commonsclause.com/), meaning **commercial use is not allowed**.
+
+If you wish to use this project for commercial purposes, please contact me at zenzenid175@gmail.com.
