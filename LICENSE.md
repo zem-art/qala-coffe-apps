@@ -1,4 +1,4 @@
-Copyright (c) 2025 zem-art.
+Copyright (c) 2025 [zem-art](https://github.com/zem-art).
 
 This code is provided for personal and educational use only.
 You may view, fork, and modify this code for **non-commercial** purposes,
