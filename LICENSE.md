@@ -1,10 +1,10 @@
-Copyright (c) 2025 [zem-art](https://github.com/zem-art).
+Copyright (c) 2025 zem-art.
 
-All rights reserved.
+This code is provided for personal and educational use only.
+You may view, fork, and modify this code for **non-commercial** purposes,
+provided that credit is given to the original author.
 
-The source code in this repository is copyrighted by [zem-art](https://github.com/zem-art).
+Commercial use, distribution, sublicensing, or selling of this code
+in whole or in part is strictly prohibited without explicit written permission.
 
-No one may copy, distribute,
-modify, or use this code for any purpose without written permission.
-
-If you would like to use this code, please contact me at zenzenid175@gmail.com.
+For commercial licensing, contact zenzenid175@gmail.com.
