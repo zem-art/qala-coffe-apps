@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import { DateRange, RangeKeyDict, Range } from "react-date-range";
+import { DateRange } from "react-date-range";
+import type { RangeKeyDict, Range } from "react-date-range";
 import { format } from "date-fns";
 import { IconRenderer } from "../IconRenderer";
 
@@ -43,7 +44,9 @@ export default function DateRangePicker({
     };
 
     const handleChange = (item: RangeKeyDict) => {
-        setRange([item.selection]);
+        if (item.selection) {
+            setRange([item.selection]);
+        }
     };
 
     const handleReset = () => {
