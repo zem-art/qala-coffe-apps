@@ -41,7 +41,7 @@ const config: Config = {
       keyframes: {
         float: {
           "0%, 100%": { transform: "translateY(0rem)" },
-          "50%": { transform: "translateY(-7rem)" },
+          "50%": { transform: "translateY(-2rem)" },
         },
         aboutImage: {
           "0%, 100%": {
