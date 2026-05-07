@@ -7,7 +7,6 @@ export default function RegisterPage() {
   const register = api.auth.register.useMutation();
   const router = useRouter();
 
-  // Form state sebagai objek
   const [formBody, setFormBody] = useState({
     name: "",
     email: "",
@@ -15,7 +14,6 @@ export default function RegisterPage() {
     role : "2"
   });
 
-  // Error state sebagai objek
   const [error, setError] = useState<{ general?: string; password?: string; name?: string }>({});
   const [loading, setLoading] = useState(false);
 
@@ -24,8 +22,6 @@ export default function RegisterPage() {
       ...formBody,
       [e.target.name]: e.target.value,
     });
-
-    // Clear error on change (optional)
     setError({});
   };
 
@@ -35,7 +31,7 @@ export default function RegisterPage() {
     setLoading(true);
 
     if (formBody.password.length < 6) {
-      setError({ password: "Password minimal 6 karakter." });
+      setError({ password: "Password must be at least 6 characters long." });
       setLoading(false);
       return;
     }
@@ -52,98 +48,96 @@ export default function RegisterPage() {
             setError({ general: err.message });
             setLoading(false);
         },
-        // onError: (error) => {
-        //     // error bentuknya tRPC error, bisa cek di `error.data?.zodError`
-        //     if (error.data?.zodError) {
-        //         // error dari Zod validasi, biasanya ada bentuk seperti array kamu kasih
-        //         const zodErrors = error.data.zodError.fieldErrors;
-        //     // Contoh ambil error untuk field name
-        //     if (zodErrors.name && zodErrors.name.length > 0) {
-        //         setError({ name: zodErrors.name[0] });
-        //     } else {
-        //         setError({ general: error.message });
-        //     }
-        //     } else {
-        //         // error umum dari backend
-        //         setError({ general: error.message });
-        //     }
-        //     setLoading(false);
-        // },
       }
     );
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen px-4">
-      <form
-        onSubmit={handleRegister}
-        className="bg-white p-6 rounded shadow w-full max-w-md space-y-4"
-      >
-        <h1 className="text-2xl font-bold text-center">Register</h1>
+    <div className="flex items-center justify-center min-h-screen p-4 bg-gray-50 font-poppins">
+      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-2xl shadow-xl border border-gray-100">
+        <div className="text-center">
+            <a href="/" className="inline-block">
+                <h1 className="text-3xl font-extrabold text-main mb-2">Create Account</h1>
+            </a>
+            <p className="text-gray-500 text-sm">Join us and start your journey</p>
+        </div>
 
-        {/* Error general */}
-        {error.general && (
-          <div className="text-red-600 bg-red-100 px-3 py-2 rounded text-sm">
-            {error.general}
+        <form onSubmit={handleRegister} className="space-y-5">
+          {error.general && (
+            <div className="p-3 text-sm text-red-600 bg-red-50 border border-red-100 rounded-lg">
+              {error.general}
+            </div>
+          )}
+
+          <div className="space-y-1">
+            <label className="text-sm font-medium text-gray-700" htmlFor="name">Full Name</label>
+            <input
+              id="name"
+              type="text"
+              name="name"
+              value={formBody.name}
+              onChange={handleChange}
+              placeholder="John Doe"
+              className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-main/50 focus:border-main focus:bg-white transition-colors outline-none"
+              required
+            />
           </div>
-        )}
 
-        <input
-          type="text"
-          name="name"
-          value={formBody.name}
-          onChange={handleChange}
-          placeholder="Name"
-          className="w-full px-3 py-2 border rounded border-main hover:border-accent"
-          required
-        />
+          <div className="space-y-1">
+            <label className="text-sm font-medium text-gray-700" htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              value={formBody.email}
+              onChange={handleChange}
+              placeholder="you@example.com"
+              className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-main/50 focus:border-main focus:bg-white transition-colors outline-none"
+              required
+            />
+          </div>
 
-        <input
-          type="email"
-          name="email"
-          value={formBody.email}
-          onChange={handleChange}
-          placeholder="Email"
-          className="w-full px-3 py-2 border rounded border-main hover:border-accent"
-          required
-        />
+          <div className="space-y-1">
+            <label className="text-sm font-medium text-gray-700" htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              value={formBody.password}
+              onChange={handleChange}
+              placeholder="••••••••"
+              className={`w-full px-4 py-3 bg-gray-50 border rounded-xl focus:ring-2 focus:bg-white transition-colors outline-none ${
+                error.password 
+                  ? "border-red-300 focus:ring-red-500/50 focus:border-red-500" 
+                  : "border-gray-200 focus:ring-main/50 focus:border-main"
+              }`}
+              required
+            />
+            {error.password && (
+              <p className="text-sm text-red-500 mt-1">{error.password}</p>
+            )}
+          </div>
 
-        <input
-          type="password"
-          name="password"
-          value={formBody.password}
-          onChange={handleChange}
-          placeholder="Password"
-          className={`w-full px-3 py-2 border rounded border-main hover:border-accent ${
-            error.password ? "border-red-600" : ""
-          }`}
-          required
-        />
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-3 font-semibold text-white transition-all bg-main rounded-xl hover:bg-[#82481f] focus:ring-4 focus:ring-main/30 disabled:opacity-70 disabled:cursor-not-allowed shadow-md hover:shadow-lg active:scale-[0.98]"
+          >
+            {loading ? "Creating account..." : "Sign up"}
+          </button>
+        </form>
 
-        {/* Error password */}
-        {error.password && (
-          <div className="text-red-600 text-sm">{error.password}</div>
-        )}
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-main text-white py-2 rounded hover:bg-main transition disabled:opacity-50 cursor-pointer"
-        >
-          {loading ? "Registering..." : "Register"}
-        </button>
-
-        <p className="mt-4 text-center text-sm">
+        <p className="text-sm text-center text-gray-600">
           Already have an account?{" "}
           <button
             type="button"
             onClick={() => router.push("/auth/sign-in")}
-            className="text-main hover:underline cursor-pointer"
+            className="font-semibold text-main hover:underline transition-colors"
           >
-            Login here
+            Sign in here
           </button>
         </p>
-      </form>
+      </div>
     </div>
   );
 }
