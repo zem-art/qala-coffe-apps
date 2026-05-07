@@ -41,55 +41,48 @@ export const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-[1000] bg-white shadow-md px-[9%] py-4 flex items-center justify-between
-        transition-transform duration-500 ease-in-out ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}
+      className={`fixed top-0 left-0 right-0 z-[1000] bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm px-6 lg:px-[9%] py-4 flex items-center justify-between
+        transition-all duration-500 ease-in-out ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}
     >
       {/* Logo */}
       <a
         href="/"
-        className="text-[2.3rem] text-main font-semibold flex items-center capitalize"
+        className="text-[2rem] md:text-[2.3rem] text-main font-bold flex items-center capitalize tracking-tight"
       >
         qala{" "}
         <IconRenderer
           lib="fa"
           name="FaCoffee"
-          className="text-main ml-4 mt-2"
-          size={35}
+          className="text-main ml-3"
+          size={30}
         />
       </a>
 
       {/* Navbar */}
       <Navbar />
 
-      {/* Book Button */}
-
-      {session?.user.name ? 
-       <>
-        <a onClick={session?.user?.role == "1" ? handleDashboard : handleLogout} className="relative hidden md:inline-block px-6 py-2 text-main group items-center cursor-pointer">
-          <span className="absolute inset-0 border-2 border-main rounded transition-all duration-500 group-hover:border-dashed group-hover:scale-x-110">
+      {/* Action Button */}
+      <div className="hidden md:flex items-center">
+        {session?.user?.name ? 
+        (
+          <button onClick={session?.user?.role == "1" ? handleDashboard : handleLogout} className="flex items-center px-5 py-2.5 bg-gray-100 text-main font-medium rounded-xl hover:bg-gray-200 transition-colors">
             <IconRenderer
-              lib="fa"
-              name="FaRegUserCircle"
-              size={20}
-              className="h-9 ml-2"
-            />
-          </span>
-          <span className="relative ml-4">
-            {session?.user?.role == "1" ? "console" : `${session?.user?.name}`}
-          </span>
-        </a>
-        </>
-       : 
-        <>
+                lib="fa"
+                name="FaRegUserCircle"
+                size={20}
+                className="mr-2"
+              />
+              {session?.user?.role == "1" ? "Console" : session?.user?.name}
+          </button>
+        ) : (
           <a
-          href={'/auth/sign-in'}
-          className="relative hidden md:inline-block px-6 py-2 text-main group cursor-pointer"
-          >
-          <span className="absolute inset-0 border-2 border-main rounded transition-all duration-500 group-hover:border-dashed group-hover:scale-x-110"></span>
-          <span className="relative z-10">Masuk / Daftar</span>
+            href={'/auth/sign-in'}
+            className="px-6 py-2.5 bg-main text-white font-medium rounded-xl hover:bg-[#82481f] transition-all shadow-md hover:shadow-lg active:scale-95"
+            >
+            Masuk / Daftar
           </a>
-        </>
-      }
+        )}
+      </div>
     </header>
   );
 };

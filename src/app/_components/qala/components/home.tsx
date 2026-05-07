@@ -8,42 +8,45 @@ export function HomeSection() {
   return (
     <section
       id="home"
-      className="min-h-screen pt-25 bg-center bg-cover"
+      className="relative min-h-screen pt-32 pb-20 flex flex-col justify-center bg-center bg-cover"
       style={{ backgroundImage: `url(${homeBg})` }}
     >
-      <div className="flex flex-wrap items-center gap-6">
-        <div className="flex-1 basis-[42rem] lg:pl-35 xs:pl-10 xs:pt-0">
-          <h3 className="md:text-[4.5rem] 2xs:text-[2.5rem] uppercase text-main">kopi segar di <br/> pagi hari</h3>
+      {/* Dark overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/50"></div>
+      
+      <div className="relative z-10 flex flex-wrap items-center gap-6 px-6 lg:px-[9%]">
+        <div className="flex-1 basis-[42rem] text-center md:text-left">
+          <h3 className="text-4xl md:text-6xl lg:text-[4.5rem] font-bold uppercase text-white leading-tight mb-6">kopi segar di <br className="hidden md:block"/> pagi hari</h3>
+          <p className="text-gray-200 text-lg md:text-xl mb-8 max-w-xl mx-auto md:mx-0">Awali hari Anda dengan secangkir kopi pilihan yang diseduh dengan sempurna. Nikmati sensasi rasanya.</p>
           <a
-            href="#"
-            className="inline-block mt-4 px-6 py-3 border-2
-             border-main text-main uppercase tracking-wider 
-             hover:bg-main-dark transition rounded-full hover:border-dashed"
+            href="#menu"
+            className="inline-block px-8 py-3.5 bg-main text-white font-semibold uppercase tracking-wider 
+             hover:bg-[#82481f] transition-all rounded-full shadow-lg hover:shadow-xl active:scale-95"
           >
             pesan sekarang
           </a>
         </div>
 
-        <div className="hidden sm:block flex-1 basis-[20rem] pt-30">
+        <div className="hidden sm:block flex-1 basis-[20rem] pt-10 md:pt-0">
           <Image
             src={homeImg1}
             alt="coffee"
-            width={260}
-            height={260}
-            className="animate-float"
+            width={300}
+            height={300}
+            className="animate-float mx-auto object-contain drop-shadow-2xl"
           />
         </div>
       </div>
 
-      <div className="text-center py-12 hidden sm:block">
+      <div className="relative z-10 text-center py-12 hidden sm:block mt-auto">
         {[homeImg1, homeImg2, homeImg3].map((img, i) => (
           <Image
             key={i}
             src={img}
             alt={`slide-${i + 1}`}
-            width={100}
-            height={100}
-            className="inline-block mx-2 pt-35 cursor-pointer hover:-translate-y-2 transition-transform"
+            width={80}
+            height={80}
+            className="inline-block mx-4 cursor-pointer hover:-translate-y-3 transition-transform drop-shadow-lg"
           />
         ))}
       </div>
