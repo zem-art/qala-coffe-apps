@@ -6,11 +6,11 @@ export const Footer = () => {
   ];
 
   const QuickLinks = [
-    { name: "home", link: "home" },
-    { name: "about", link: "about" },
+    { name: "beranda", link: "home" },
+    { name: "tentang kami", link: "about" },
     { name: "menu", link: "menu" },
-    { name: "review", link: "review" },
-    { name: "book", link: "book" },
+    { name: "ulasan", link: "review" },
+    { name: "reservasi", link: "book" },
   ];
 
   const SocialLink = [
@@ -25,7 +25,7 @@ export const Footer = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
         {/* Our Branches */}
         <div>
-          <h3 className="text-2xl font-semibold mb-4">Our Branches</h3>
+          <h3 className="text-2xl font-semibold mb-4">Cabang Kami</h3>
           {OurBranch.map((data, idx) => (
             <a
               key={idx}
@@ -45,12 +45,12 @@ export const Footer = () => {
 
         {/* Quick Links */}
         <div>
-          <h3 className="text-2xl font-semibold mb-4">Quick Links</h3>
+          <h3 className="text-2xl font-semibold mb-4">Tautan Cepat</h3>
           {QuickLinks.map((data, idx) => (
             <a
               key={idx}
               href={`#${data?.link}`}
-              className="block text-base py-1 hover:pl-4 transition-all duration-200"
+              className="block text-base py-1 hover:pl-4 transition-all duration-200 capitalize"
             >
               <IconRenderer
                 lib="fa"
@@ -65,7 +65,7 @@ export const Footer = () => {
 
         {/* Contact Info */}
         <div>
-          <h3 className="text-2xl font-semibold mb-4">Contact Info</h3>
+          <h3 className="text-2xl font-semibold mb-4">Info Kontak</h3>
           <a href="#" className="block text-base py-1">
             <IconRenderer
               lib="fa"
@@ -97,12 +97,12 @@ export const Footer = () => {
 
         {/* Social Links */}
         <div>
-          <h3 className="text-2xl font-semibold mb-4">Follow Us</h3>
+          <h3 className="text-2xl font-semibold mb-4">Ikuti Kami</h3>
           {SocialLink.map((social, idx) => (
             <a
               key={idx}
               href="#"
-              className="block text-base py-1 hover:pl-4 transition-all duration-200"
+              className="block text-base py-1 hover:pl-4 transition-all duration-200 capitalize"
             >
               <i className={`${social.icon} mr-2`} />
               <IconRenderer

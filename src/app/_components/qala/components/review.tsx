@@ -13,9 +13,9 @@ export const ReviewSection = () => {
   return (
     <section id="review" className="py-16 px-4 bg-gray-50">
       <h1 className="text-6xl font-bold text-center text-main mb-12 capitalize">
-        reviews{" "}
+        ulasan{" "}
         <span className="block text-main text-2xl font-normal">
-          what people say
+          apa kata mereka
         </span>
       </h1>
       <div className="max-w-7xl mx-auto">

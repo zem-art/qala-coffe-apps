@@ -52,8 +52,8 @@ export const BookingForm = () => {
       className={"bg-[url('/image/booking-bg.jpg')] bg-cover bg-center py-16 px-4"}
     >
       <h1 className="text-6xl md:text-5xl font-bold text-center text-main mb-10 uppercase">
-        booking{" "}
-        <span className="block text-lg font-normal">reserve a table</span>
+        reservasi{" "}
+        <span className="block text-lg font-normal">pesan meja</span>
       </h1>
 
       <form className="max-w-2xl mx-auto border border-main rounded-xl p-6 bg-white/60 backdrop-blur-md shadow" onSubmit={handleSubmit}>
@@ -61,7 +61,7 @@ export const BookingForm = () => {
           onChange={handleChange}
           type="text"
           name="name"
-          placeholder="Name"
+          placeholder="Nama"
           className="w-full p-3 text-base rounded-md bg-transparent border border-main text-main placeholder-main mb-4 focus:outline-none focus:border-main/60"
         />
         <input
@@ -75,18 +75,18 @@ export const BookingForm = () => {
           onChange={handleChange}
           type="number"
           name="phone"
-          placeholder="Phone Number"
+          placeholder="Nomor Telepon"
           className="w-full p-3 text-base rounded-md bg-transparent border border-main text-main placeholder-main mb-4 focus:outline-none focus:border-main/60"
         />
         <input
           onChange={handleChange}
           type="number"
           name="number"
-          placeholder="Qty (Number of People)"
+          placeholder="Jumlah Orang"
           className="w-full p-3 text-base rounded-md bg-transparent border border-main text-main placeholder-main mb-4 focus:outline-none focus:border-main/60"
         />
         <textarea
-          placeholder="Message"
+          placeholder="Pesan"
           rows={6}
           name="message"
           onChange={handleChange}
@@ -94,8 +94,8 @@ export const BookingForm = () => {
         ></textarea>
         <input
           type="submit"
-          value="send message"
-          className="btn bg-main text-white py-2 px-4 rounded-md hover:bg-main/80 cursor-pointer transition"
+          value="kirim pesan"
+          className="btn bg-main text-white py-2 px-4 rounded-md hover:bg-main/80 cursor-pointer transition capitalize"
         />
       </form>
     </section>

@@ -86,7 +86,7 @@ export const Header = () => {
           className="relative hidden md:inline-block px-6 py-2 text-main group cursor-pointer"
           >
           <span className="absolute inset-0 border-2 border-main rounded transition-all duration-500 group-hover:border-dashed group-hover:scale-x-110"></span>
-          <span className="relative z-10">Sign In or Up</span>
+          <span className="relative z-10">Masuk / Daftar</span>
           </a>
         </>
       }

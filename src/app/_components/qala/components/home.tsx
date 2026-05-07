@@ -13,14 +13,14 @@ export function HomeSection() {
     >
       <div className="flex flex-wrap items-center gap-6">
         <div className="flex-1 basis-[42rem] lg:pl-35 xs:pl-10 xs:pt-0">
-          <h3 className="md:text-[4.5rem] 2xs:text-[2.5rem] uppercase text-main">fresh coffee in <br/> the morning</h3>
+          <h3 className="md:text-[4.5rem] 2xs:text-[2.5rem] uppercase text-main">kopi segar di <br/> pagi hari</h3>
           <a
             href="#"
             className="inline-block mt-4 px-6 py-3 border-2
              border-main text-main uppercase tracking-wider 
              hover:bg-main-dark transition rounded-full hover:border-dashed"
           >
-            buy one now
+            pesan sekarang
           </a>
         </div>
 

@@ -86,9 +86,9 @@ export const MenuSection = () => {
       className="bg-[url('/image/menu-bg.jpg')] bg-cover bg-center py-16 px-4"
     >
       <h1 className="text-6xl font-bold text-center text-main mb-12 uppercase">
-        our menu{" "}
+        menu kami{" "}
         <span className="block text-main text-2xl font-normal">
-          popular menu
+          menu populer
         </span>
       </h1>
 
