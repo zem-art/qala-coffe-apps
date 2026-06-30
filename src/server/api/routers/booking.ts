@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
-export const bokkingRouter = createTRPCRouter({
+export const bookingRouter = createTRPCRouter({
     create : publicProcedure
         .input(
             z.object({ 
@@ -13,12 +13,12 @@ export const bokkingRouter = createTRPCRouter({
                 number: z.number(),
             }))
         .mutation(async ({ input, ctx }) => {
-            return await ctx.db.bokking.create({ data: input})
+            return await ctx.db.booking.create({ data: input})
         }),
 
     getAll : publicProcedure
         .query(async ({ ctx }) => {
-            return await ctx.db.bokking.findMany({
+            return await ctx.db.booking.findMany({
                 orderBy : { createdAt : "desc" }
             })
         })

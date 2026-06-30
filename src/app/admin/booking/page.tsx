@@ -7,18 +7,18 @@ import { renderTableHeader } from '~/app/_components/table/table-header';
 import { renderTableBodyDefault } from '~/app/_components/table/table-body';
 import { IconRenderer } from '~/app/_components/IconRenderer';
 
-export default function ListBokking() {
+export default function ListBooking() {
     const PAGE_SIZE = 7;
     const router = useRouter();
-    const { data: bokking, isLoading } = api.bokking.getAll.useQuery();
+    const { data: booking, isLoading } = api.booking.getAll.useQuery();
     // const deleteProduct = api.product.delete.useMutation();
     const title_header = ["no", "name", "email", "phone", "action"];
-    const { currentPage, setCurrentPage, maxPage, paginatedData } = useClientPagination(bokking || [], PAGE_SIZE);
+    const { currentPage, setCurrentPage, maxPage, paginatedData } = useClientPagination(booking || [], PAGE_SIZE);
     
     return (
       <div className="p-4">
         <div className="flex items-center justify-between pb-4">
-          <h2 className="text-2xl font-bold mb-4 dark:text-background uppercase">list bokking</h2>
+          <h2 className="text-2xl font-bold mb-4 dark:text-background uppercase">list booking</h2>
           {/* <button
             className="p-2 rounded-sm bg-secondary hover:bg-accent cursor-pointer"
             onClick={() => router.push("/admin/products/new")}

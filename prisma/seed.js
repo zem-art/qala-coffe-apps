@@ -50,7 +50,7 @@ async function main() {
     data : ProductData
   })
 
-  await prisma.bokking.createMany({
+  await prisma.booking.createMany({
     data : [
       {
         name : "Ucups", 

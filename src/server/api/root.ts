@@ -4,7 +4,7 @@ import { authRouter } from "~/server/api/routers/auth";
 import { productRouter } from "./routers/products";
 import { categoryRouter } from "./routers/categorys";
 import { reportRouter } from "./routers/report";
-import { bokkingRouter } from "./routers/bokking";
+import { bookingRouter } from "./routers/booking";
 import { reviewRouter } from "./routers/reviews";
 
 /**
@@ -18,7 +18,7 @@ export const appRouter = createTRPCRouter({
   product: productRouter,
   category: categoryRouter,
   dashboard : reportRouter,
-  bokking : bokkingRouter,
+  booking : bookingRouter,
   review: reviewRouter,
 });
 

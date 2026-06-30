@@ -4,7 +4,7 @@ import { api } from "~/trpc/react";
 
 export const BookingForm = () => {
   // Replace with the correct mutation for booking that accepts all fields
-  const createBokking = api.bokking.create.useMutation();
+  const createBooking = api.booking.create.useMutation();
 
   const [form, setForm] = useState({
     name: "",
@@ -29,7 +29,7 @@ export const BookingForm = () => {
                 return alert("forms harus diisi.");
             }
 
-            await createBokking.mutateAsync({
+            await createBooking.mutateAsync({
                 name: form.name,
                 email: form.email,
                 phone : form.phone,

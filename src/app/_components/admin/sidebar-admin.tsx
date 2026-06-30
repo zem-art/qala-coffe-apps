@@ -6,7 +6,7 @@ const items: { name: string; icon: string; lib: IconLibrary; url?: string }[] = 
   { name: "Dashboard", icon: "MdDashboard", lib: "md", url : "/admin/dashboard" },
   { name: "User", icon: "FaUser", lib: "fa", url: "/admin/users" },
   { name: "Product", icon: "FaCoffee", lib: "fa", url: "/admin/products" },
-  { name: "Bokking", icon: "RiCalendarScheduleLine", lib: "ri", url: "/admin/bokking" },
+  { name: "Booking", icon: "RiCalendarScheduleLine", lib: "ri", url: "/admin/booking" },
   { name: "Review", icon: "BsBarChartLineFill", lib: "bs", url: "/admin/review" },
 ];
 
