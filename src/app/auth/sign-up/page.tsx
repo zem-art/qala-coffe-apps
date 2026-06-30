@@ -2,6 +2,7 @@
 import { api } from "~/trpc/react";
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { IconRenderer } from "~/app/_components/IconRenderer"
 
 export default function RegisterPage() {
   const register = api.auth.register.useMutation();
@@ -31,7 +32,7 @@ export default function RegisterPage() {
     setLoading(true);
 
     if (formBody.password.length < 6) {
-      setError({ password: "Password must be at least 6 characters long." });
+      setError({ password: "Kata sandi minimal 6 karakter." });
       setLoading(false);
       return;
     }
@@ -53,88 +54,116 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-4 bg-gray-50 font-poppins">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-2xl shadow-xl border border-gray-100">
+    <div 
+        className="flex items-center justify-center min-h-screen p-4 bg-cover bg-center bg-fixed font-poppins relative"
+        style={{ backgroundImage: "url('/image/booking-bg.jpg')" }}
+    >
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+
+      <div className="relative z-10 w-full max-w-md p-8 sm:p-10 space-y-8 bg-white/10 backdrop-blur-md rounded-[2.5rem] shadow-2xl border border-white/20">
         <div className="text-center">
-            <a href="/" className="inline-block">
-                <h1 className="text-3xl font-extrabold text-main mb-2">Create Account</h1>
+            <a href="/" className="inline-flex items-center gap-3 mb-2 group">
+                <IconRenderer lib="fa" name="FaCoffee" className="text-white group-hover:scale-110 transition-transform" size={28} />
+                <h1 className="text-3xl font-extrabold text-white tracking-tight">Qala Coffee</h1>
             </a>
-            <p className="text-gray-500 text-sm">Join us and start your journey</p>
+            <p className="text-gray-300 text-sm mt-2">Bergabunglah dan mulai perjalanan Anda</p>
         </div>
 
-        <form onSubmit={handleRegister} className="space-y-5">
+        <form onSubmit={handleRegister} className="space-y-6">
           {error.general && (
-            <div className="p-3 text-sm text-red-600 bg-red-50 border border-red-100 rounded-lg">
-              {error.general}
+            <div className="p-4 text-sm text-red-200 bg-red-900/40 border border-red-500/30 rounded-xl flex items-start gap-3 backdrop-blur-md">
+                <IconRenderer lib="fa" name="FaExclamationCircle" className="mt-0.5 shrink-0" size={16} />
+                <span>{error.general}</span>
             </div>
           )}
 
-          <div className="space-y-1">
-            <label className="text-sm font-medium text-gray-700" htmlFor="name">Full Name</label>
-            <input
-              id="name"
-              type="text"
-              name="name"
-              value={formBody.name}
-              onChange={handleChange}
-              placeholder="John Doe"
-              className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-main/50 focus:border-main focus:bg-white transition-colors outline-none"
-              required
-            />
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-gray-200 ml-1" htmlFor="name">Nama Lengkap</label>
+            <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                    <IconRenderer lib="fa" name="FaUser" size={16} />
+                </div>
+                <input
+                  id="name"
+                  type="text"
+                  name="name"
+                  value={formBody.name}
+                  onChange={handleChange}
+                  placeholder="Budi Santoso"
+                  className="w-full pl-11 pr-4 py-3.5 bg-white/10 border border-white/20 rounded-2xl focus:ring-2 focus:ring-main/80 focus:border-main text-white placeholder-gray-400 transition-all outline-none backdrop-blur-sm"
+                  required
+                />
+            </div>
           </div>
 
-          <div className="space-y-1">
-            <label className="text-sm font-medium text-gray-700" htmlFor="email">Email</label>
-            <input
-              id="email"
-              type="email"
-              name="email"
-              value={formBody.email}
-              onChange={handleChange}
-              placeholder="you@example.com"
-              className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-main/50 focus:border-main focus:bg-white transition-colors outline-none"
-              required
-            />
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-gray-200 ml-1" htmlFor="email">Email</label>
+            <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                    <IconRenderer lib="fa" name="FaEnvelope" size={16} />
+                </div>
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  value={formBody.email}
+                  onChange={handleChange}
+                  placeholder="nama@email.com"
+                  className="w-full pl-11 pr-4 py-3.5 bg-white/10 border border-white/20 rounded-2xl focus:ring-2 focus:ring-main/80 focus:border-main text-white placeholder-gray-400 transition-all outline-none backdrop-blur-sm"
+                  required
+                />
+            </div>
           </div>
 
-          <div className="space-y-1">
-            <label className="text-sm font-medium text-gray-700" htmlFor="password">Password</label>
-            <input
-              id="password"
-              type="password"
-              name="password"
-              value={formBody.password}
-              onChange={handleChange}
-              placeholder="••••••••"
-              className={`w-full px-4 py-3 bg-gray-50 border rounded-xl focus:ring-2 focus:bg-white transition-colors outline-none ${
-                error.password 
-                  ? "border-red-300 focus:ring-red-500/50 focus:border-red-500" 
-                  : "border-gray-200 focus:ring-main/50 focus:border-main"
-              }`}
-              required
-            />
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-gray-200 ml-1" htmlFor="password">Kata Sandi</label>
+            <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                    <IconRenderer lib="fa" name="FaLock" size={16} />
+                </div>
+                <input
+                  id="password"
+                  type="password"
+                  name="password"
+                  value={formBody.password}
+                  onChange={handleChange}
+                  placeholder="••••••••"
+                  className={`w-full pl-11 pr-4 py-3.5 bg-white/10 border rounded-2xl focus:ring-2 transition-all outline-none backdrop-blur-sm text-white placeholder-gray-400 ${
+                    error.password 
+                      ? "border-red-500/50 focus:ring-red-500/50 focus:border-red-500" 
+                      : "border-white/20 focus:ring-main/80 focus:border-main"
+                  }`}
+                  required
+                />
+            </div>
             {error.password && (
-              <p className="text-sm text-red-500 mt-1">{error.password}</p>
+              <p className="text-sm text-red-300 mt-1.5 ml-1">{error.password}</p>
             )}
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 font-semibold text-white transition-all bg-main rounded-xl hover:bg-[#82481f] focus:ring-4 focus:ring-main/30 disabled:opacity-70 disabled:cursor-not-allowed shadow-md hover:shadow-lg active:scale-[0.98]"
+            className="w-full py-4 font-bold text-white transition-all bg-main rounded-2xl hover:bg-[#82481f] focus:ring-4 focus:ring-main/50 disabled:opacity-70 disabled:cursor-not-allowed shadow-xl hover:shadow-2xl active:scale-[0.98] mt-2 tracking-wide uppercase text-sm"
           >
-            {loading ? "Creating account..." : "Sign up"}
+            {loading ? (
+                <span className="flex items-center justify-center gap-2">
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    Membuat akun...
+                </span>
+            ) : "Daftar"}
           </button>
         </form>
 
-        <p className="text-sm text-center text-gray-600">
-          Already have an account?{" "}
+        <p className="text-sm text-center text-gray-300">
+          Sudah punya akun?{" "}
           <button
             type="button"
             onClick={() => router.push("/auth/sign-in")}
-            className="font-semibold text-main hover:underline transition-colors"
+            className="font-bold text-white hover:text-main hover:underline transition-colors"
           >
-            Sign in here
+            Masuk di sini
           </button>
         </p>
       </div>
