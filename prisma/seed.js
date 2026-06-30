@@ -6,7 +6,17 @@ import { ProductData } from "./json/product.js";
 const prisma = new PrismaClient();
 
 async function main() {
-
+  // Bersihkan data lama terlebih dahulu (urutan penting untuk menghindari constraint error)
+  console.log("Menghapus data lama...");
+  await prisma.review.deleteMany({});
+  await prisma.booking.deleteMany({});
+  await prisma.product.deleteMany({});
+  await prisma.category.deleteMany({});
+  await prisma.session.deleteMany({});
+  await prisma.account.deleteMany({});
+  await prisma.user.deleteMany({});
+  console.log("Data lama berhasil dihapus.");
+  
   // insert user
   // Hash password
   const password = "password"
@@ -33,15 +43,15 @@ async function main() {
   // insert category
   await prisma.category.createMany({
     data: [
-      { name: "espresso based" },
-      { name: "manual brew" },
-      { name: "kopi susu & lokal" },
-      { name: "iced coffee" },
-      { name: "signature / flavored coffee" },
-      { name: "decaf" },
-      { name: "specialty / single origin" },
-      { name: "seasonal menu" },
-      { name: "non-coffee" },
+      { id: 1, name: "espresso based" },
+      { id: 2, name: "manual brew" },
+      { id: 3, name: "kopi susu & lokal" },
+      { id: 4, name: "iced coffee" },
+      { id: 5, name: "signature / flavored coffee" },
+      { id: 6, name: "decaf" },
+      { id: 7, name: "specialty / single origin" },
+      { id: 8, name: "seasonal menu" },
+      { id: 9, name: "non-coffee" },
     ]
   })
 
@@ -50,38 +60,24 @@ async function main() {
     data : ProductData
   })
 
+  
+  const dummyBookings = [];
+  const names = ["Andi", "Budi", "Cici", "Dedi", "Eka", "Fani", "Gita", "Hadi", "Intan", "Joko"];
+  for(let i=0; i<200; i++) {
+    const n = names[Math.floor(Math.random()*names.length)] + " " + Math.floor(Math.random()*1000);
+    dummyBookings.push({
+      name: n,
+      email: n.replace(/ /g, "").toLowerCase() + "@mail.com",
+      phone: "08" + Math.floor(Math.random()*10000000000),
+      number: Math.floor(Math.random()*5) + 1,
+      message: "Booking untuk " + (Math.floor(Math.random()*5) + 1) + " orang",
+      createdAt: new Date(Date.now() - Math.random()*10000000000).toISOString()
+    });
+  }
   await prisma.booking.createMany({
-    data : [
-      {
-        name : "Ucups", 
-        email : "ucup@maill.com",
-        phone : "0873245346343",
-        number : 1,
-        message : "saya mau pesan 1 meja untuk 2 orang",
-      },
-      {
-        name : "kasep", 
-        email : "kasep@maill.com",
-        phone : "082346345217",
-        number : 2,
-        message : "saya mau pesan 1 meja untuk 2 orang",
-      },
-      {
-        name : "rine", 
-        email : "rine@maill.com",
-        phone : "08346523423332",
-        number : 3,
-        message : "saya mau pesan 1 meja untuk 2 orang",
-      },
-      {
-        name : "juki", 
-        email : "juki@maill.com",
-        phone : "082347654578",
-        number : 4,
-        message : "saya mau pesan 1 meja untuk 2 orang",
-      }
-    ]
-  })
+    data: dummyBookings
+  });
+
 
   await prisma.review.createMany({
     data: ReviewData
