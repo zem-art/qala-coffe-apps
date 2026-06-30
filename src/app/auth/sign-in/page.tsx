@@ -36,7 +36,7 @@ export default function LoginPage() {
         setLoadingButton(true)
 
         try {
-            const res:any = await signIn("credentials", {
+            const res: any = await signIn("credentials", {
                 email,
                 password,
                 redirect: false,
@@ -72,7 +72,7 @@ export default function LoginPage() {
             Facebook: "FaFacebook",
             Discord: "FaDiscord",
         }[provider.name]
-        
+
         // Use a generic icon or colored icon for Google
         const iconColor = provider.name === "Google" ? "text-red-500" : "text-current";
 
@@ -152,7 +152,7 @@ export default function LoginPage() {
                         <span className="px-3 text-gray-500 bg-white">Or continue with</span>
                     </div>
                 </div>
-
+                {/* 
                 {!loading && providers ? (
                     <div className="flex flex-col sm:flex-row gap-3">
                         {Object.values(providers)
@@ -163,7 +163,7 @@ export default function LoginPage() {
                     <div className="flex justify-center">
                         <div className="w-6 h-6 border-2 border-main border-t-transparent rounded-full animate-spin"></div>
                     </div>
-                )}
+                )} */}
 
                 <p className="text-sm text-center text-gray-600">
                     Don't have an account?{" "}
