@@ -49,12 +49,12 @@ export const BookingForm = () => {
   return (
     <section
       id="book"
-      className={"relative bg-[url('/image/booking-bg.jpg')] bg-cover bg-center bg-fixed py-20 px-6 lg:px-[9%]"}
+      className="relative bg-[url('/image/booking-bg.jpg')] bg-cover bg-center bg-fixed py-20"
     >
       {/* Dark overlay for contrast */}
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
 
-      <div className="relative z-10">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white uppercase tracking-tight mb-2">
             reservasi

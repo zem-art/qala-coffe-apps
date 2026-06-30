@@ -11,16 +11,16 @@ export const ReviewSection = () => {
   const { data: testimonials, isLoading } = api.review.getAllDashboard.useQuery();
 
   return (
-    <section id="review" className="py-20 px-6 lg:px-[9%] bg-white">
-      <div className="text-center mb-16">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-main capitalize tracking-tight mb-2">
-          ulasan
-        </h1>
-        <span className="block text-lg md:text-xl font-medium text-gray-500">
-          apa kata mereka
-        </span>
-      </div>
-      <div className="max-w-7xl mx-auto">
+    <section id="review" className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-main capitalize tracking-tight mb-2">
+            ulasan
+          </h1>
+          <span className="block text-lg md:text-xl font-medium text-gray-500">
+            apa kata mereka
+          </span>
+        </div>
         <Swiper
           modules={[Autoplay, Pagination]}
           loop={true}

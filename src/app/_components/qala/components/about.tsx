@@ -6,7 +6,8 @@ const aboutIcon3 = "/image/about-icon-3.png";
 
 export function AboutSection() {
     return (
-        <section id="about" className="py-20 px-6 sm:px-8 lg:px-[9%] bg-gray-50">
+        <section id="about" className="py-20 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
                 <h1 className="text-4xl md:text-5xl font-extrabold text-main uppercase tracking-tight mb-2">
                     tentang kami
@@ -57,8 +58,9 @@ export function AboutSection() {
                             </div>
                         ))}
                     </div>
-                </div>
-            </div>
+          </div>
+        </div>
+      </div>
         </section>
     )
 }
