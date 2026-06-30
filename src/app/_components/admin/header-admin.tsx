@@ -12,52 +12,44 @@ export default function HeaderDashboard({ onToggleSidebar }: { onToggleSidebar: 
     }
   }
   return (
-    <header className="flex justify-between items-center bg-white dark:bg-gray-800 px-6 py-4 shadow border-b border-gray-200 dark:border-gray-700">
+    <header className="sticky top-0 z-30 flex justify-between items-center bg-white/80 backdrop-blur-md dark:bg-gray-900/80 px-6 py-4 shadow-sm border-b border-gray-100 dark:border-gray-800 transition-colors">
       <div className="flex items-center space-x-4">
         {/* Hamburger Menu */}
         <button
-          className="md:hidden text-gray-600 dark:text-white focus:outline-none cursor-pointer"
+          className="md:hidden p-2 rounded-lg text-gray-600 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none cursor-pointer"
           onClick={onToggleSidebar}
         >
           <IconRenderer
             name="MdMenu"
             lib="md"
             size={24}
-            className="text-gray-600 dark:text-white"
           />
         </button>
-
-        {/* <input
-          type="text"
-          placeholder="Search or type command..."
-          className="w-full max-w-md px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        /> */}
       </div>
 
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-3">
         <ThemeToggle />
         <button
-          className="rounded-full p-2.5 items-center dark:bg-gray-700 text-sm dark:border-none cursor-pointer border-2 border-gray-300"
+          className="flex items-center justify-center rounded-full p-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-all cursor-pointer shadow-sm"
+          title="Profile"
         >
           <IconRenderer
             name="FaUserCircle"
-            className="text-gray-800 dark:text-white"
             lib="fa"
-            size={17}
+            size={18}
             />
         </button>
         <button
-          className="rounded-full p-2.5 items-center dark:bg-gray-700 text-sm dark:border-none cursor-pointer border-2 border-gray-300"
+          className="flex items-center justify-center rounded-full p-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:bg-red-50 hover:text-red-500 hover:border-red-200 dark:hover:bg-red-900/30 dark:hover:text-red-400 dark:hover:border-red-800 text-gray-600 dark:text-gray-300 transition-all cursor-pointer shadow-sm"
           onClick={handleLogout}
+          title="Logout"
         >
           <IconRenderer
             name="FaDoorOpen"
-            className="text-gray-800 dark:text-white"
             lib="fa"
-            size={17}
+            size={18}
           />
         </button>
-       
       </div>
     </header>
   );

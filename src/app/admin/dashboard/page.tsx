@@ -71,9 +71,9 @@ export default function DashboardPage() {
 
   return (
     <>
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-800 dark:text-background">Welcome</h1>
-        <div className="absolute right-5 top-20 z-50">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">Dashboard Overview</h1>
+        <div className="relative z-20 w-full md:w-auto">
           <DateRangePicker onApply={handleApplyDateRange}/>
         </div>
       </div>
@@ -88,21 +88,21 @@ export default function DashboardPage() {
           ))
         ) : (
           <>
-            <StatsCard title="Customers" value={String(dataCount?.userCount)} change="+0%" positive />
-            <StatsCard title="Product" value={String(dataCount?.productCount)} change="+0%" positive />
-            <StatsCard title="category" value={String(dataCount?.categoryCount)} change="0%" positive/>
+            <StatsCard title="Customers" value={String(dataCount?.userCount)} change="+0%" positive iconName="FaUser" iconLib="fa" />
+            <StatsCard title="Product" value={String(dataCount?.productCount)} change="+0%" positive iconName="FaCoffee" iconLib="fa" />
+            <StatsCard title="category" value={String(dataCount?.categoryCount)} change="0%" positive iconName="MdCategory" iconLib="md" />
           </>
         )}
       </div>
 
       <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Monthly Review Card */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow">
-          <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-white">Monthly Reviews</h3>
+        <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-800">
+          <h3 className="text-lg font-bold mb-4 text-gray-900 dark:text-white">Monthly Reviews</h3>
           {isSkeletonReview ? (
             <div className="h-auto bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
           ) : (
-            <div className="h-auto p-3 bg-blue-100 dark:bg-blue-300/20 rounded flex items-center justify-center text-sm text-blue-800 dark:text-blue-200">
+            <div className="h-auto p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl flex items-center justify-center text-sm">
               <ChartWrapper
                 type="line"
                 data={lineChartResult}
@@ -114,8 +114,8 @@ export default function DashboardPage() {
         </div>
 
         {/* Statistics Card */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow">
-          <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-white">Statistics Review</h3>
+        <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col">
+          <h3 className="text-lg font-bold mb-4 text-gray-900 dark:text-white">Statistics Review</h3>
           <div className="flex space-x-2 mb-4 justify-between">
             {tabs.map((tab) => (
               <button
@@ -124,8 +124,8 @@ export default function DashboardPage() {
                 disabled={isSkeletonReview}
                 className={`px-4 py-2 rounded-full text-sm transition cursor-pointer ${
                   selectedTab === tab
-                    ? "bg-indigo-600 text-white"
-                    : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+                    ? "bg-main text-white shadow-md shadow-main/20"
+                    : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
                 }`}
               >
                 {tab}
@@ -135,7 +135,7 @@ export default function DashboardPage() {
           {isSkeletonReview ? (
             <div className="h-48 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
           ) : (
-            <div className="h-auto bg-indigo-100 dark:bg-indigo-300/20 rounded flex items-center justify-center text-sm text-indigo-800 dark:text-indigo-200">
+            <div className="h-auto flex-1 bg-gray-50 dark:bg-gray-800/50 rounded-xl flex items-center justify-center text-sm p-4">
               {selectedTab == "Monthly" ? 
                 <ChartWrapper
                   type="pie"
@@ -177,8 +177,8 @@ export default function DashboardPage() {
 
       <div className="mt-6 grid gap-6">
         {/* Example Chart */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow">
-          <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-white capitalize">example chart simplify usage</h3>
+        <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-800">
+          <h3 className="text-lg font-bold mb-4 text-gray-900 dark:text-white capitalize">example chart simplify usage</h3>
           <div className="flex space-x-2 mb-4">
             {exampleChart.map((tab) => (
               <button
@@ -187,8 +187,8 @@ export default function DashboardPage() {
                 disabled={isSkeletonReview}
                 className={`px-4 py-2 rounded-full text-sm transition cursor-pointer ${
                   selectedTabChart === tab
-                    ? "bg-indigo-600 text-white"
-                    : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+                    ? "bg-main text-white shadow-md shadow-main/20"
+                    : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
                 }`}
               >
                 {tab?.replace("_", " ")}
@@ -198,7 +198,7 @@ export default function DashboardPage() {
           {isSkeletonReview ? (
             <div className="h-48 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
           ) : (
-            <div className="h-auto bg-indigo-100 dark:bg-indigo-300/20 rounded flex items-center justify-center text-sm text-indigo-800 dark:text-indigo-200">
+            <div className="h-auto bg-gray-50 dark:bg-gray-800/50 rounded-xl flex items-center justify-center text-sm p-4">
               {selectedTabChart == "line_chart" ? 
                 <ChartWrapper
                   type="line"
@@ -228,8 +228,8 @@ export default function DashboardPage() {
 
       <div className="mt-6 grid gap-6">
         {/* Example Chart */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow">
-          <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-white capitalize">example multi chart</h3>
+        <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-800">
+          <h3 className="text-lg font-bold mb-4 text-gray-900 dark:text-white capitalize">example multi chart</h3>
           <div className="flex space-x-2 mb-4">
             {exampleChart.map((tab) => (
               <button
@@ -238,8 +238,8 @@ export default function DashboardPage() {
                 disabled={isSkeletonReview}
                 className={`px-4 py-2 rounded-full text-sm transition cursor-pointer ${
                   selectedTabChart === tab
-                    ? "bg-indigo-600 text-white"
-                    : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+                    ? "bg-main text-white shadow-md shadow-main/20"
+                    : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
                 }`}
               >
                 {tab?.replace("_", " ")}
@@ -249,7 +249,7 @@ export default function DashboardPage() {
           {isSkeletonReview ? (
             <div className="h-48 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
           ) : (
-            <div className="h-auto bg-indigo-100 dark:bg-indigo-300/20 rounded flex items-center justify-center text-sm text-indigo-800 dark:text-indigo-200">
+            <div className="h-auto bg-gray-50 dark:bg-gray-800/50 rounded-xl flex items-center justify-center text-sm p-4">
               {selectedTabChart == "line_chart" ? 
                 <ChartWrapperMulti
                   type="line"
