@@ -14,7 +14,7 @@ export function HomeSection() {
       {/* Dark overlay for better text readability */}
       <div className="absolute inset-0 bg-black/50"></div>
       
-      <div className="relative z-10 flex flex-wrap items-center gap-6 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 flex flex-wrap items-center gap-6 max-w-screen-2xl mx-auto w-full px-4 sm:px-6 lg:px-8">
         <div className="flex-1 basis-[42rem] text-center md:text-left">
           <h3 className="text-4xl md:text-6xl lg:text-[4.5rem] font-bold uppercase text-white leading-tight mb-6">kopi segar di <br className="hidden md:block"/> pagi hari</h3>
           <p className="text-gray-200 text-lg md:text-xl mb-8 max-w-xl mx-auto md:mx-0">Awali hari Anda dengan secangkir kopi pilihan yang diseduh dengan sempurna. Nikmati sensasi rasanya.</p>

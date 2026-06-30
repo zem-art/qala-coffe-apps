@@ -12,7 +12,7 @@ export const ReviewSection = () => {
 
   return (
     <section id="review" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-extrabold text-main capitalize tracking-tight mb-2">
             ulasan

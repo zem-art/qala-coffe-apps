@@ -43,7 +43,7 @@ export const Header = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-[1000] bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all duration-500 ease-in-out ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between w-full">
+      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between w-full">
         {/* Logo */}
         <a
           href="/"
