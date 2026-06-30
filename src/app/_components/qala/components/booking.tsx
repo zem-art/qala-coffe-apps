@@ -4,7 +4,7 @@ import { api } from "~/trpc/react";
 
 export const BookingForm = () => {
   // Replace with the correct mutation for booking that accepts all fields
-  const createBokking = api.bokking.create.useMutation();
+  const createBooking = api.booking.create.useMutation();
 
   const [form, setForm] = useState({
     name: "",
@@ -29,7 +29,7 @@ export const BookingForm = () => {
                 return alert("forms harus diisi.");
             }
 
-            await createBokking.mutateAsync({
+            await createBooking.mutateAsync({
                 name: form.name,
                 email: form.email,
                 phone : form.phone,
@@ -49,55 +49,67 @@ export const BookingForm = () => {
   return (
     <section
       id="book"
-      className={"bg-[url('/image/booking-bg.jpg')] bg-cover bg-center py-16 px-4"}
+      className="relative bg-[url('/image/booking-bg.jpg')] bg-cover bg-center bg-fixed py-20"
     >
-      <h1 className="text-6xl md:text-5xl font-bold text-center text-main mb-10 uppercase">
-        booking{" "}
-        <span className="block text-lg font-normal">reserve a table</span>
-      </h1>
+      {/* Dark overlay for contrast */}
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
 
-      <form className="max-w-2xl mx-auto border border-main rounded-xl p-6 bg-white/60 backdrop-blur-md shadow" onSubmit={handleSubmit}>
-        <input
-          onChange={handleChange}
-          type="text"
-          name="name"
-          placeholder="Name"
-          className="w-full p-3 text-base rounded-md bg-transparent border border-main text-main placeholder-main mb-4 focus:outline-none focus:border-main/60"
-        />
-        <input
-          onChange={handleChange}
-          type="email"
-          name="email"
-          placeholder="Email"
-          className="w-full p-3 text-base rounded-md bg-transparent border border-main text-main placeholder-main mb-4 focus:outline-none focus:border-main/60"
-        />
-        <input
-          onChange={handleChange}
-          type="number"
-          name="phone"
-          placeholder="Phone Number"
-          className="w-full p-3 text-base rounded-md bg-transparent border border-main text-main placeholder-main mb-4 focus:outline-none focus:border-main/60"
-        />
-        <input
-          onChange={handleChange}
-          type="number"
-          name="number"
-          placeholder="Qty (Number of People)"
-          className="w-full p-3 text-base rounded-md bg-transparent border border-main text-main placeholder-main mb-4 focus:outline-none focus:border-main/60"
-        />
-        <textarea
-          placeholder="Message"
-          rows={6}
-          name="message"
-          onChange={handleChange}
-          className="w-full p-3 text-base rounded-md bg-transparent border border-main text-main placeholder-main mb-4 resize-none focus:outline-none focus:border-main/60"
-        ></textarea>
-        <input
-          type="submit"
-          value="send message"
-          className="btn bg-main text-white py-2 px-4 rounded-md hover:bg-main/80 cursor-pointer transition"
-        />
-      </form>
+      <div className="relative z-10 max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white uppercase tracking-tight mb-2">
+            reservasi
+          </h1>
+          <span className="block text-lg md:text-xl font-medium text-gray-300">pesan meja</span>
+        </div>
+
+        <form className="max-w-2xl mx-auto rounded-3xl p-8 bg-white shadow-2xl" onSubmit={handleSubmit}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <input
+              onChange={handleChange}
+              type="text"
+              name="name"
+              placeholder="Nama"
+              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-main/50 focus:border-main focus:bg-white transition-colors outline-none"
+            />
+            <input
+              onChange={handleChange}
+              type="email"
+              name="email"
+              placeholder="Email"
+              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-main/50 focus:border-main focus:bg-white transition-colors outline-none"
+            />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <input
+              onChange={handleChange}
+              type="number"
+              name="phone"
+              placeholder="Nomor Telepon"
+              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-main/50 focus:border-main focus:bg-white transition-colors outline-none"
+            />
+            <input
+              onChange={handleChange}
+              type="number"
+              name="number"
+              placeholder="Jumlah Orang"
+              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-main/50 focus:border-main focus:bg-white transition-colors outline-none"
+            />
+          </div>
+          <textarea
+            placeholder="Pesan"
+            rows={5}
+            name="message"
+            onChange={handleChange}
+            className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-main/50 focus:border-main focus:bg-white transition-colors outline-none mb-6 resize-none"
+          ></textarea>
+          <button
+            type="submit"
+            className="w-full py-4 bg-main text-white font-bold rounded-xl hover:bg-[#82481f] transition-all shadow-md active:scale-[0.98] capitalize text-lg"
+          >
+            kirim pesan
+          </button>
+        </form>
+      </div>
     </section>
   );
 };

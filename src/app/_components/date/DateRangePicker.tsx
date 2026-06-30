@@ -65,7 +65,7 @@ export default function DateRangePicker({
     };
 
     return (
-        <div className={`p-4 ` + (showPicker ? "bg-background dark:bg-gray-700 rounded shadow-md w-full max-w-md" : "")}>
+        <div className={`p-4 relative ` + (showPicker ? "bg-background dark:bg-gray-700 rounded shadow-sm w-full max-w-md" : "")}>
         {isDisabled ? (
             <div className="text-gray-500">Date Range Picker is disabled</div>
         ) : (
@@ -86,7 +86,7 @@ export default function DateRangePicker({
             )}
 
             {showPicker && (
-                <div className="mt-4">
+                <div className="mt-4 absolute right-0 top-full z-50 shadow-xl bg-white dark:bg-gray-800 rounded-lg p-2 border border-gray-100 dark:border-gray-700">
                 <DateRange
                     editableDateInputs
                     onChange={handleChange}

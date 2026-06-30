@@ -21,7 +21,7 @@ export default function LoginPage() {
                 setProviders(res)
             } catch (error) {
                 console.error("Error fetching providers:", error)
-                setErrorMsg("Failed to load providers. Please try again later.")
+                setErrorMsg("Gagal memuat metode login. Silakan coba lagi nanti.")
             } finally {
                 setLoading(false)
             }
@@ -36,7 +36,7 @@ export default function LoginPage() {
         setLoadingButton(true)
 
         try {
-            const res:any = await signIn("credentials", {
+            const res: any = await signIn("credentials", {
                 email,
                 password,
                 redirect: false,
@@ -46,104 +46,112 @@ export default function LoginPage() {
             if (!res?.error && res?.ok) {
                 router.push("/admin/dashboard")
                 setLoadingButton(false)
-                // alert("Login successful! Redirecting to home page...")
             } else {
                 console.error("Login failed:", res?.error)
-                setErrorMsg("Invalid email or password please check again.")
+                setErrorMsg("Email atau kata sandi tidak valid. Silakan periksa kembali.")
                 setLoadingButton(false)
             }
         } catch (error) {
             setLoadingButton(false)
             console.error("Login error:", error)
-            setErrorMsg("Something went wrong. Please try again.")
+            setErrorMsg("Terjadi kesalahan. Silakan coba lagi.")
         }
-    }
-
-    const renderProviderButton = (provider: ClientSafeProvider) => {
-        const providerStyles: Record<string, string> = {
-            Google: "bg-[#f44242] text-white hover:bg-[#e83535]",
-            GitHub: "bg-[#333] text-white hover:bg-[#444]",
-            Facebook: "bg-[#1877F2] text-white hover:bg-[#165EAB]",
-            Discord: "bg-[#5865F2] text-white hover:bg-[#4752C4]",
-        }
-
-        const iconName = {
-            Google: "FaGoogle",
-            GitHub: "FaGithub",
-            Facebook: "FaFacebook",
-            Discord: "FaDiscord",
-        }[provider.name]
-
-        return (
-            <button
-                key={provider.id}
-                onClick={() => signIn(provider.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-md transition cursor-pointer ${providerStyles[provider.name] ?? "bg-gray-200"}`}
-            >
-                <IconRenderer lib="fa" name={iconName ?? ""} size={24} />
-                <span>{provider.name}</span>
-            </button>
-        )
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen px-4">
-            <div className="bg-white p-6 rounded shadow w-full max-w-md space-y-6">
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <a href="/">
-                        <h1 className="text-2xl font-bold text-center mb-4">Login</h1>
+        <div 
+            className="flex items-center justify-center min-h-screen p-4 bg-cover bg-center bg-fixed font-poppins relative"
+            style={{ backgroundImage: "url('/image/booking-bg.jpg')" }}
+        >
+            {/* Dark overlay */}
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+
+            <div className="relative z-10 w-full max-w-md p-8 sm:p-10 space-y-8 bg-white/10 backdrop-blur-md rounded-[2.5rem] shadow-2xl border border-white/20">
+                <div className="text-center">
+                    <a href="/" className="inline-flex items-center gap-3 mb-2 group">
+                        <IconRenderer lib="fa" name="FaCoffee" className="text-white group-hover:scale-110 transition-transform" size={28} />
+                        <h1 className="text-3xl font-extrabold text-white tracking-tight">Qala Coffee</h1>
                     </a>
+                    <p className="text-gray-300 text-sm mt-2">Selamat datang kembali! Masuk ke akun Anda.</p>
+                </div>
 
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Email"
-                        className="w-full px-3 py-2 border rounded border-main hover:border-accent"
-                        required
-                    />
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Password"
-                        className="w-full px-3 py-2 border rounded border-main hover:border-accent"
-                        required
-                    />
+                <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="space-y-2">
+                        <label className="text-sm font-medium text-gray-200 ml-1" htmlFor="email">Email</label>
+                        <div className="relative">
+                            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                                <IconRenderer lib="fa" name="FaEnvelope" size={16} />
+                            </div>
+                            <input
+                                id="email"
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="nama@email.com"
+                                className="w-full pl-11 pr-4 py-3.5 bg-white/10 border border-white/20 rounded-2xl focus:ring-2 focus:ring-main/80 focus:border-main text-white placeholder-gray-400 transition-all outline-none backdrop-blur-sm"
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div className="space-y-2">
+                        <div className="flex items-center justify-between ml-1">
+                            <label className="text-sm font-medium text-gray-200" htmlFor="password">Kata Sandi</label>
+                            <a href="#" className="text-xs text-gray-300 hover:text-white hover:underline font-medium transition-colors">Lupa kata sandi?</a>
+                        </div>
+                        <div className="relative">
+                            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                                <IconRenderer lib="fa" name="FaLock" size={16} />
+                            </div>
+                            <input
+                                id="password"
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="••••••••"
+                                className="w-full pl-11 pr-4 py-3.5 bg-white/10 border border-white/20 rounded-2xl focus:ring-2 focus:ring-main/80 focus:border-main text-white placeholder-gray-400 transition-all outline-none backdrop-blur-sm"
+                                required
+                            />
+                        </div>
+                    </div>
 
-                    {errorMsg && <p className="text-sm text-red-500">{errorMsg}</p>}
+                    {errorMsg && (
+                        <div className="p-4 text-sm text-red-200 bg-red-900/40 border border-red-500/30 rounded-xl flex items-start gap-3 backdrop-blur-md">
+                            <IconRenderer lib="fa" name="FaExclamationCircle" className="mt-0.5 shrink-0" size={16} />
+                            <span>{errorMsg}</span>
+                        </div>
+                    )}
 
                     <button
                         type="submit"
                         disabled={LoadingButton}
-                        className="w-full bg-main text-white py-2 rounded hover:bg-accent transition cursor-pointer"
+                        className="w-full py-4 font-bold text-white transition-all bg-main rounded-2xl hover:bg-[#82481f] focus:ring-4 focus:ring-main/50 disabled:opacity-70 disabled:cursor-not-allowed shadow-xl hover:shadow-2xl active:scale-[0.98] mt-2 tracking-wide uppercase text-sm"
                     >
-                        {LoadingButton ? "Logging in..." : "Login"}
+                        {LoadingButton ? (
+                            <span className="flex items-center justify-center gap-2">
+                                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                                Sedang masuk...
+                            </span>
+                        ) : "Masuk Sekarang"}
                     </button>
                 </form>
 
-                <div className="flex items-center justify-center space-x-4">
-                    <div className="h-px bg-gray-300 w-full"></div>
-                    <span className="text-gray-500 text-sm">with</span>
-                    <div className="h-px bg-gray-300 w-full"></div>
+                <div className="relative">
+                    <div className="absolute inset-0 flex items-center">
+                        <div className="w-full border-t border-white/20"></div>
+                    </div>
+                    <div className="relative flex justify-center text-sm">
+                        <span className="px-4 text-gray-400 bg-[#1a1614] rounded-full backdrop-blur-xl">Atau</span>
+                    </div>
                 </div>
 
-                {!loading && providers && (
-                    <div className="flex flex-wrap justify-center gap-3">
-                        {Object.values(providers)
-                            .filter((provider) => provider.id !== "credentials")
-                            .map(renderProviderButton)}
-                    </div>
-                )}
-
-                <p className="mt-4 text-center text-sm">
-                    Don't have an account yet ? {" "}
+                <p className="text-sm text-center text-gray-300">
+                    Belum punya akun?{" "}
                     <button
                         type="button"
                         onClick={() => router.push("/auth/sign-up")}
-                        className="text-main hover:underline cursor-pointer"
+                        className="font-bold text-white hover:text-main hover:underline transition-colors"
                     >
-                        Sign Up Here
+                        Daftar di sini
                     </button>
                 </p>
             </div>

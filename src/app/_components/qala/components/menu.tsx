@@ -83,16 +83,22 @@ export const MenuSection = () => {
   return (
     <section
       id="menu"
-      className="bg-[url('/image/menu-bg.jpg')] bg-cover bg-center py-16 px-4"
+      className="relative bg-[url('/image/menu-bg.jpg')] bg-cover bg-center bg-fixed py-20"
     >
-      <h1 className="text-6xl font-bold text-center text-main mb-12 uppercase">
-        our menu{" "}
-        <span className="block text-main text-2xl font-normal">
-          popular menu
-        </span>
-      </h1>
+      {/* Light overlay for readability */}
+      <div className="absolute inset-0 bg-white/80 backdrop-blur-[2px]"></div>
 
-      <div className="flex flex-wrap justify-center gap-14">
+      <div className="relative z-10 max-w-screen-2xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-main uppercase tracking-tight mb-2">
+            menu kami
+          </h1>
+          <span className="block text-lg md:text-xl font-medium text-gray-700">
+            menu populer
+          </span>
+        </div>
+
+      <div className="flex flex-wrap justify-center gap-10 lg:gap-14">
         {isLoading
           ? Array.from({ length: 6 }).map((_, index) => (
               <MenuItemSkeleton key={index} />
@@ -108,6 +114,7 @@ export const MenuSection = () => {
                   />
                 ))
               : [])}
+      </div>
       </div>
     </section>
   );

@@ -33,7 +33,7 @@ export function renderTableBodyDefault<T>({
           colSpan={cols}
           className="px-4 py-4 text-center text-gray-500 dark:text-gray-400"
         >
-          No data found.
+          Data tidak ditemukan.
         </td>
       </tr>
     );
