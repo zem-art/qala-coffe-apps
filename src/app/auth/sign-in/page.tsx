@@ -21,7 +21,7 @@ export default function LoginPage() {
                 setProviders(res)
             } catch (error) {
                 console.error("Error fetching providers:", error)
-                setErrorMsg("Failed to load providers. Please try again later.")
+                setErrorMsg("Gagal memuat metode login. Silakan coba lagi nanti.")
             } finally {
                 setLoading(false)
             }
@@ -48,131 +48,110 @@ export default function LoginPage() {
                 setLoadingButton(false)
             } else {
                 console.error("Login failed:", res?.error)
-                setErrorMsg("Invalid email or password please check again.")
+                setErrorMsg("Email atau kata sandi tidak valid. Silakan periksa kembali.")
                 setLoadingButton(false)
             }
         } catch (error) {
             setLoadingButton(false)
             console.error("Login error:", error)
-            setErrorMsg("Something went wrong. Please try again.")
+            setErrorMsg("Terjadi kesalahan. Silakan coba lagi.")
         }
-    }
-
-    const renderProviderButton = (provider: ClientSafeProvider) => {
-        const providerStyles: Record<string, string> = {
-            Google: "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50",
-            GitHub: "bg-[#24292F] text-white hover:bg-[#24292F]/90",
-            Facebook: "bg-[#1877F2] text-white hover:bg-[#1877F2]/90",
-            Discord: "bg-[#5865F2] text-white hover:bg-[#5865F2]/90",
-        }
-
-        const iconName = {
-            Google: "FaGoogle",
-            GitHub: "FaGithub",
-            Facebook: "FaFacebook",
-            Discord: "FaDiscord",
-        }[provider.name]
-
-        // Use a generic icon or colored icon for Google
-        const iconColor = provider.name === "Google" ? "text-red-500" : "text-current";
-
-        return (
-            <button
-                key={provider.id}
-                onClick={() => signIn(provider.id)}
-                className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl transition-all shadow-sm font-medium ${providerStyles[provider.name] ?? "bg-gray-200 text-gray-800"}`}
-            >
-                <div className={iconColor}>
-                    <IconRenderer lib="fa" name={iconName ?? ""} size={20} />
-                </div>
-                <span>{provider.name}</span>
-            </button>
-        )
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen p-4 bg-gray-50 font-poppins">
-            <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-2xl shadow-xl border border-gray-100">
+        <div 
+            className="flex items-center justify-center min-h-screen p-4 bg-cover bg-center bg-fixed font-poppins relative"
+            style={{ backgroundImage: "url('/image/booking-bg.jpg')" }}
+        >
+            {/* Dark overlay */}
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+
+            <div className="relative z-10 w-full max-w-md p-8 sm:p-10 space-y-8 bg-white/10 backdrop-blur-md rounded-[2.5rem] shadow-2xl border border-white/20">
                 <div className="text-center">
-                    <a href="/" className="inline-block">
-                        <h1 className="text-3xl font-extrabold text-main mb-2">Welcome Back</h1>
+                    <a href="/" className="inline-flex items-center gap-3 mb-2 group">
+                        <IconRenderer lib="fa" name="FaCoffee" className="text-white group-hover:scale-110 transition-transform" size={28} />
+                        <h1 className="text-3xl font-extrabold text-white tracking-tight">Qala Coffee</h1>
                     </a>
-                    <p className="text-gray-500 text-sm">Sign in to your account to continue</p>
+                    <p className="text-gray-300 text-sm mt-2">Selamat datang kembali! Masuk ke akun Anda.</p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-5">
-                    <div className="space-y-1">
-                        <label className="text-sm font-medium text-gray-700" htmlFor="email">Email</label>
-                        <input
-                            id="email"
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="you@example.com"
-                            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-main/50 focus:border-main focus:bg-white transition-colors outline-none"
-                            required
-                        />
-                    </div>
-                    <div className="space-y-1">
-                        <div className="flex items-center justify-between">
-                            <label className="text-sm font-medium text-gray-700" htmlFor="password">Password</label>
-                            <a href="#" className="text-xs text-main hover:underline font-medium">Forgot password?</a>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="space-y-2">
+                        <label className="text-sm font-medium text-gray-200 ml-1" htmlFor="email">Email</label>
+                        <div className="relative">
+                            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                                <IconRenderer lib="fa" name="FaEnvelope" size={16} />
+                            </div>
+                            <input
+                                id="email"
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="nama@email.com"
+                                className="w-full pl-11 pr-4 py-3.5 bg-white/10 border border-white/20 rounded-2xl focus:ring-2 focus:ring-main/80 focus:border-main text-white placeholder-gray-400 transition-all outline-none backdrop-blur-sm"
+                                required
+                            />
                         </div>
-                        <input
-                            id="password"
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="••••••••"
-                            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-main/50 focus:border-main focus:bg-white transition-colors outline-none"
-                            required
-                        />
+                    </div>
+                    <div className="space-y-2">
+                        <div className="flex items-center justify-between ml-1">
+                            <label className="text-sm font-medium text-gray-200" htmlFor="password">Kata Sandi</label>
+                            <a href="#" className="text-xs text-gray-300 hover:text-white hover:underline font-medium transition-colors">Lupa kata sandi?</a>
+                        </div>
+                        <div className="relative">
+                            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                                <IconRenderer lib="fa" name="FaLock" size={16} />
+                            </div>
+                            <input
+                                id="password"
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="••••••••"
+                                className="w-full pl-11 pr-4 py-3.5 bg-white/10 border border-white/20 rounded-2xl focus:ring-2 focus:ring-main/80 focus:border-main text-white placeholder-gray-400 transition-all outline-none backdrop-blur-sm"
+                                required
+                            />
+                        </div>
                     </div>
 
                     {errorMsg && (
-                        <div className="p-3 text-sm text-red-600 bg-red-50 border border-red-100 rounded-lg">
-                            {errorMsg}
+                        <div className="p-4 text-sm text-red-200 bg-red-900/40 border border-red-500/30 rounded-xl flex items-start gap-3 backdrop-blur-md">
+                            <IconRenderer lib="fa" name="FaExclamationCircle" className="mt-0.5 shrink-0" size={16} />
+                            <span>{errorMsg}</span>
                         </div>
                     )}
 
                     <button
                         type="submit"
                         disabled={LoadingButton}
-                        className="w-full py-3 font-semibold text-white transition-all bg-main rounded-xl hover:bg-[#82481f] focus:ring-4 focus:ring-main/30 disabled:opacity-70 disabled:cursor-not-allowed shadow-md hover:shadow-lg active:scale-[0.98]"
+                        className="w-full py-4 font-bold text-white transition-all bg-main rounded-2xl hover:bg-[#82481f] focus:ring-4 focus:ring-main/50 disabled:opacity-70 disabled:cursor-not-allowed shadow-xl hover:shadow-2xl active:scale-[0.98] mt-2 tracking-wide uppercase text-sm"
                     >
-                        {LoadingButton ? "Signing in..." : "Sign in"}
+                        {LoadingButton ? (
+                            <span className="flex items-center justify-center gap-2">
+                                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                                Sedang masuk...
+                            </span>
+                        ) : "Masuk Sekarang"}
                     </button>
                 </form>
 
                 <div className="relative">
                     <div className="absolute inset-0 flex items-center">
-                        <div className="w-full border-t border-gray-200"></div>
+                        <div className="w-full border-t border-white/20"></div>
                     </div>
                     <div className="relative flex justify-center text-sm">
-                        <span className="px-3 text-gray-500 bg-white">Or continue with</span>
+                        <span className="px-4 text-gray-400 bg-[#1a1614] rounded-full backdrop-blur-xl">Atau</span>
                     </div>
                 </div>
-                {/* 
-                {!loading && providers ? (
-                    <div className="flex flex-col sm:flex-row gap-3">
-                        {Object.values(providers)
-                            .filter((provider) => provider.id !== "credentials")
-                            .map(renderProviderButton)}
-                    </div>
-                ) : (
-                    <div className="flex justify-center">
-                        <div className="w-6 h-6 border-2 border-main border-t-transparent rounded-full animate-spin"></div>
-                    </div>
-                )} */}
 
-                <p className="text-sm text-center text-gray-600">
-                    Don't have an account?{" "}
+                <p className="text-sm text-center text-gray-300">
+                    Belum punya akun?{" "}
                     <button
                         type="button"
                         onClick={() => router.push("/auth/sign-up")}
-                        className="font-semibold text-main hover:underline transition-colors"
+                        className="font-bold text-white hover:text-main hover:underline transition-colors"
                     >
-                        Sign up here
+                        Daftar di sini
                     </button>
                 </p>
             </div>
