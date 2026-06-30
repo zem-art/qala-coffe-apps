@@ -25,7 +25,7 @@ export default function StatsCard({ title, value, change, positive, iconName, ic
         <p className="text-3xl font-bold text-gray-900 dark:text-white mb-1">{value}</p>
         <p className={`text-sm font-medium flex items-center gap-1 ${positive ? 'text-green-500' : 'text-red-500'}`}>
           <IconRenderer name={positive ? "MdTrendingUp" : "MdTrendingDown"} lib="md" size={16} />
-          <span>{change} <span className="text-gray-400 dark:text-gray-500 font-normal ml-1">vs last month</span></span>
+          <span>{change} <span className="text-gray-400 dark:text-gray-500 font-normal ml-1">vs bulan lalu</span></span>
         </p>
       </div>
     </div>

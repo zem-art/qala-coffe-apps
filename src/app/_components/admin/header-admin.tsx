@@ -7,7 +7,7 @@ import { signOut } from "next-auth/react";
 
 export default function HeaderDashboard({ onToggleSidebar }: { onToggleSidebar: () => void }) {
   const handleLogout = async () => {
-    if(window.confirm('Are you sure you want to log out ?.')){
+    if(window.confirm('Apakah Anda yakin ingin keluar?')){
       signOut({ callbackUrl: '/auth/sign-in' })
     }
   }
@@ -31,7 +31,7 @@ export default function HeaderDashboard({ onToggleSidebar }: { onToggleSidebar: 
         <ThemeToggle />
         <button
           className="flex items-center justify-center rounded-full p-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-all cursor-pointer shadow-sm"
-          title="Profile"
+          title="Profil"
         >
           <IconRenderer
             name="FaUserCircle"
@@ -42,7 +42,7 @@ export default function HeaderDashboard({ onToggleSidebar }: { onToggleSidebar: 
         <button
           className="flex items-center justify-center rounded-full p-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:bg-red-50 hover:text-red-500 hover:border-red-200 dark:hover:bg-red-900/30 dark:hover:text-red-400 dark:hover:border-red-800 text-gray-600 dark:text-gray-300 transition-all cursor-pointer shadow-sm"
           onClick={handleLogout}
-          title="Logout"
+          title="Keluar"
         >
           <IconRenderer
             name="FaDoorOpen"

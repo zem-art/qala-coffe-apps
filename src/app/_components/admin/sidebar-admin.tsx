@@ -5,11 +5,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const items: { name: string; icon: string; lib: IconLibrary; url: string }[] = [
-  { name: "Dashboard", icon: "MdDashboard", lib: "md", url : "/admin/dashboard" },
-  { name: "User", icon: "FaUser", lib: "fa", url: "/admin/users" },
-  { name: "Product", icon: "FaCoffee", lib: "fa", url: "/admin/products" },
-  { name: "Booking", icon: "RiCalendarScheduleLine", lib: "ri", url: "/admin/booking" },
-  { name: "Review", icon: "BsBarChartLineFill", lib: "bs", url: "/admin/review" },
+  { name: "Dasbor", icon: "MdDashboard", lib: "md", url : "/admin/dashboard" },
+  { name: "Pengguna", icon: "FaUser", lib: "fa", url: "/admin/users" },
+  { name: "Produk", icon: "FaCoffee", lib: "fa", url: "/admin/products" },
+  { name: "Reservasi", icon: "RiCalendarScheduleLine", lib: "ri", url: "/admin/booking" },
+  { name: "Ulasan", icon: "BsBarChartLineFill", lib: "bs", url: "/admin/review" },
 ];
 
 export default function SidebarDashboard({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
