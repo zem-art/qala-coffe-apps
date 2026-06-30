@@ -11,10 +11,18 @@ export default function ListBooking() {
     const PAGE_SIZE = 7;
     const router = useRouter();
     const { data: booking, isLoading } = api.booking.getAll.useQuery();
-    // const deleteBooking = api.booking.delete.useMutation();
+    const deleteBooking = api.booking.delete.useMutation();
     const title_header = ["No", "Nama Pemesan", "Email", "No. Telepon", "Aksi"];
     const { currentPage, setCurrentPage, maxPage, paginatedData } = useClientPagination(booking || [], PAGE_SIZE);
     
+    const handleDeleteBooking = async (id: string) => {
+        if(window.confirm('Apakah Anda yakin ingin menghapus data reservasi ini?')){
+            if(!id) alert('ID tidak ditemukan')
+            await deleteBooking.mutateAsync({ id })
+            window.location.reload()
+        }
+    }
+
     return (
       <div className="p-4 md:p-6 lg:p-8 space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -61,7 +69,7 @@ export default function ListBooking() {
                             <IconRenderer lib="fa" name="FaPen" size={16} />
                           </button>
                           <button 
-                            // onClick={() => handleDeleteBooking(dtx.id || '')} 
+                            onClick={() => handleDeleteBooking(dtx.id || '')} 
                             className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-colors cursor-pointer" 
                             title="Hapus Reservasi"
                           >
